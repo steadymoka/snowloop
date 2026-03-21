@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -d .snowloop ] && [ -f .snowloop/PROTOCOL.md ]; then echo '🔄 snowloop 활성 프로젝트 감지. .snowloop/PROTOCOL.md에 따라 자율 운영 중입니다. /snowloop:status로 현재 상태를 확인하거나, /snowloop:heartbeat로 사이클을 실행하세요.'; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
