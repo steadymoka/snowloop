@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.1] - 2026-03-21
+
+### Changed
+
+- Rename `plan` mode to `design` mode to avoid confusion with Claude Code's built-in plan mode
+- Add English comment headers to all template files for reviewer clarity
+- Add `hooks/hooks.json` with SessionStart hook for `.snowloop/` project detection
+- Add `allowed-tools` and `disable-model-invocation` frontmatter to all skills
+- Add `${CLAUDE_SKILL_DIR}` template paths in init skill for reliable plugin resolution
+- Add component paths (`skills`, `hooks`) to `plugin.json`
+
 ## [0.1.0] - 2026-03-21
 
 ### Added
