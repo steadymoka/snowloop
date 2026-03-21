@@ -23,6 +23,16 @@ The agent self-governs through a `.snowloop/` protocol and evolves its own proce
 /loop 10m /snowloop:heartbeat        # auto-repeat every 10 minutes
 ```
 
+### Autonomous Mode
+
+For fully autonomous operation, start Claude Code with `--dangerously-skip-permissions`:
+
+```bash
+claude --dangerously-skip-permissions
+```
+
+The `guard.py` hook (installed by `/snowloop:init`) blocks file modifications outside the project directory, so autonomous operation remains safe within your project scope.
+
 ## Skills
 
 | Skill | Description |

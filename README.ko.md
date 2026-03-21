@@ -23,6 +23,16 @@ Claude Code용 자율 에이전트 운영 플러그인.
 /loop 10m /snowloop:heartbeat        # 10분마다 자동 반복
 ```
 
+### 자율 운영 모드
+
+완전한 자율 운영을 위해 `--dangerously-skip-permissions` 플래그로 Claude Code를 실행합니다:
+
+```bash
+claude --dangerously-skip-permissions
+```
+
+`/snowloop:init`이 설치하는 `guard.py` 훅이 프로젝트 디렉토리 밖 파일 수정을 차단하므로, 자율 운영 중에도 프로젝트 범위 내에서 안전하게 동작합니다.
+
 ## Skills
 
 | Skill | 설명 |
