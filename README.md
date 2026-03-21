@@ -1,8 +1,12 @@
+<p align="right">
+  <strong>English</strong> | <a href="./README.ko.md">한국어</a>
+</p>
+
 # snowloop
 
 Autonomous agent orchestration plugin for Claude Code.
 
-`.snowloop/` 프로토콜을 통해 에이전트가 자율 운영하고, 스스로 프로토콜을 진화시킵니다.
+The agent self-governs through a `.snowloop/` protocol and evolves its own process over time.
 
 ## Install
 
@@ -14,76 +18,91 @@ Autonomous agent orchestration plugin for Claude Code.
 ## Quick Start
 
 ```
-/snowloop:init              # .snowloop/ 생성, 모드 선택 (dev / plan)
-/snowloop:heartbeat         # 자율 운영 1 사이클
-/loop 10m /snowloop:heartbeat   # 10분마다 자동 반복
+/snowloop:init                       # scaffold .snowloop/, choose mode (dev / plan)
+/snowloop:heartbeat                  # run one autonomous cycle
+/loop 10m /snowloop:heartbeat        # auto-repeat every 10 minutes
 ```
 
 ## Skills
 
 | Skill | Description |
 |-------|-------------|
-| `/snowloop:init` | 프로젝트에 `.snowloop/` 초기화. dev(개발) 또는 plan(기획) 모드 선택 |
-| `/snowloop:heartbeat` | PROTOCOL.md를 읽고 1회 자율 사이클 실행 |
-| `/snowloop:status` | 현재 상태 대시보드 — heartbeat 수, 백로그, 이상 징후 |
-| `/snowloop:retro` | 즉시 회고 — 메트릭 산출, anomaly 탐지, 프로토콜 개선 제안 |
-| `/snowloop:evolve` | 프로토콜 진화 분석 — 패치 효과 비교, lateral thinking 옵션 |
+| `/snowloop:init` | Initialize `.snowloop/` in your project. Choose dev or plan mode |
+| `/snowloop:heartbeat` | Read PROTOCOL.md and execute one autonomous cycle |
+| `/snowloop:status` | Dashboard — heartbeat count, backlog depth, anomaly flags |
+| `/snowloop:retro` | Immediate retrospective — metrics, anomaly detection, protocol improvement proposals |
+| `/snowloop:evolve` | Protocol evolution analysis — patch effectiveness, lateral thinking options |
 
 ## Modes
 
 ### Dev Mode
-빌드 검증, 테스트 전략, 코드 패트롤 중심.
-- DoD 3레벨 (L1 빌드 → L2 기능검증 → L3 통합검증)
-- Proactive Work: Health Audit → User Scenario → Integration Check → Code Patrol → Gap Analysis
+
+Build verification, testing strategy, and code patrol.
+
+- 3-level Definition of Done (L1 build → L2 functional → L3 integration)
+- Proactive Work tiers: Health Audit → User Scenario → Integration Check → Code Patrol → Gap Analysis
+- Phase Directives: Building → Stabilizing → Shipping
 
 ### Plan Mode
-디자인 이터레이션, 산출물 관리, 피드백 루프 중심.
-- 산출물 구조: `specs/`, `wireframes/`, `research/`
-- 날짜 프리픽스 네이밍: `YYYY-MM-DD-<name>.<ext>`
-- Proactive Work: 기존 디자인 개선 → 크로스폴리네이션 → 경쟁 분석 → 일관성 감사 → 구현 준비
+
+Design iteration, artifact management, and feedback loops.
+
+- Output structure: `specs/`, `wireframes/`, `research/`
+- Date-prefixed naming: `YYYY-MM-DD-<name>.<ext>`
+- Proactive Work tiers: Design Improvement → Cross-pollination → Competitive Analysis → Consistency Audit → Implementation Prep
+- Phase Directives: Exploring → Converging → Implementing
 
 ## How It Works
 
 ```
-Heartbeat Cycle (매 사이클):
-  상태 확인 → COMMS 처리 → BACKLOG 작업 → LOG 기록 → RETRO 체크
+Heartbeat Cycle (each cycle):
+  Check State → Process COMMS → Execute BACKLOG → Write LOG → RETRO Check
 
-Self-Evolution (RETRO에서 발견한 개선):
+Self-Evolution (improvements found in RETRO):
   Stagnation Detection → Oscillation Detection → Regression Detection
-  → Wonder Gap Analysis → Protocol Patch 적용/제안
+  → Wonder Gap Analysis → Protocol Patch apply/propose
 ```
 
 ### .snowloop/ Structure
 
 ```
 .snowloop/
-├── MISSION.md       # 미션 정의, DoD, Proactive Work
-├── PROTOCOL.md      # 자율 운영 프로토콜 (self-evolution 대상)
-├── COMMS.md         # Human ↔ Agent 소통 ([→agent] / [→human])
-├── BACKLOG.md       # 작업 목록 (P0~P3)
-├── PROGRESS.md      # 현재 heartbeat, 작업 상태
-├── LOG.md           # 작업 이력
-├── RETRO.md         # 회고 기록
-└── EVOLUTION.md     # 프로토콜 변경 이력
+├── MISSION.md       # Mission definition, DoD, Proactive Work
+├── PROTOCOL.md      # Autonomous operation protocol (self-evolution target)
+├── COMMS.md         # Human ↔ Agent communication ([→agent] / [→human])
+├── BACKLOG.md       # Task list (P0~P3 priority)
+├── PROGRESS.md      # Current heartbeat count, task state
+├── LOG.md           # Work history
+├── RETRO.md         # Retrospective records
+└── EVOLUTION.md     # Protocol change history
 ```
 
 ## Self-Evolution
 
-RETRO(10 heartbeat마다 자동)에서 프로세스 개선을 발견하면 PROTOCOL.md를 자동 수정합니다.
+Every 10 heartbeats, a retrospective runs automatically. When it discovers process improvements, it patches PROTOCOL.md directly.
 
-| Type | 설명 | 적용 방식 |
-|------|------|-----------|
-| Parameter Patch | 임계값/횟수 조정 | PROTOCOL.md 직접 수정 |
-| Structural Patch | 단계 추가/제거 | COMMS에 제안 → 자동승인 |
-| Question | 프로세스 가정 질문 | 3회 반복 시 patch로 승격 |
-| Revert | 메트릭 악화 시 되돌림 | 자동 감지 + 되돌림 |
+| Type | Description | How Applied |
+|------|-------------|-------------|
+| Parameter Patch | Threshold/count adjustments | Direct PROTOCOL.md edit |
+| Structural Patch | Add/remove steps or rules | Propose via COMMS → auto-approve |
+| Question | Challenge process assumptions | Escalate to patch after 3 repeats |
+| Revert | Metrics worsened after patch | Auto-detect + rollback |
+
+### Anomaly Detection
+
+- **Stagnation**: Same task stuck for 3+ heartbeats, or 3 consecutive idle cycles
+- **Oscillation**: Same patch applied → reverted → applied again (A→B→A pattern)
+- **Regression**: Metrics worsened after a protocol patch (distinguished from pre-existing issues)
+- **Wonder**: Socratic questioning of process assumptions ("What haven't we tested?")
 
 ### Safety Rails
 
-자가 품질 기준 완화를 방지합니다:
-- DoD 레벨 하향 금지
-- Proactive Work 제거 금지
-- RETRO 주기 연장 금지
+Prevents the agent from weakening its own quality standards:
+
+- Cannot lower Definition of Done levels
+- Cannot remove Proactive Work tiers
+- Cannot extend RETRO intervals
+- All three require explicit human approval to change
 
 ## License
 
