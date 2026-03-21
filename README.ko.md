@@ -18,7 +18,7 @@ Claude Code용 자율 에이전트 운영 플러그인.
 ## 빠른 시작
 
 ```
-/snowloop:init                       # .snowloop/ 생성, 모드 선택 (dev / plan)
+/snowloop:init                       # .snowloop/ 생성, 모드 선택 (dev / design)
 /snowloop:heartbeat                  # 자율 운영 1 사이클
 /loop 10m /snowloop:heartbeat        # 10분마다 자동 반복
 ```
@@ -27,7 +27,7 @@ Claude Code용 자율 에이전트 운영 플러그인.
 
 | Skill | 설명 |
 |-------|------|
-| `/snowloop:init` | 프로젝트에 `.snowloop/` 초기화. dev(개발) 또는 plan(기획) 모드 선택 |
+| `/snowloop:init` | 프로젝트에 `.snowloop/` 초기화. dev(개발) 또는 design(기획) 모드 선택 |
 | `/snowloop:heartbeat` | PROTOCOL.md를 읽고 1회 자율 사이클 실행 |
 | `/snowloop:status` | 현재 상태 대시보드 — heartbeat 수, 백로그, 이상 징후 |
 | `/snowloop:retro` | 즉시 회고 — 메트릭 산출, anomaly 탐지, 프로토콜 개선 제안 |
@@ -43,7 +43,7 @@ Claude Code용 자율 에이전트 운영 플러그인.
 - Proactive Work: Health Audit → User Scenario → Integration Check → Code Patrol → Gap Analysis
 - Phase Directives: Building → Stabilizing → Shipping
 
-### Plan 모드
+### Design 모드
 
 디자인 이터레이션, 산출물 관리, 피드백 루프 중심.
 

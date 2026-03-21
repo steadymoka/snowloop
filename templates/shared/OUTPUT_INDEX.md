@@ -1,4 +1,4 @@
-<!-- EN: Output artifact index for plan mode. Tracks specs, wireframes, and research docs. -->
+<!-- EN: Output artifact index for design mode. Tracks specs, wireframes, and research docs. -->
 # Output Index
 > 기획 산출물 목록. 날짜순 정렬.
 > 네이밍: `YYYY-MM-DD-<descriptive-name>.<ext>`

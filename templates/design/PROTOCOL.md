@@ -1,5 +1,5 @@
-<!-- EN: Plan mode autonomous operation protocol. Defines heartbeat cycle with output management, retrospective process, design iteration guide, and self-evolution rules. -->
-# Protocol: Plan Mode
+<!-- EN: Design mode autonomous operation protocol. Defines heartbeat cycle with output management, retrospective process, design iteration guide, and self-evolution rules. -->
+# Protocol: Design Mode
 
 > 이 파일은 기획 모드 자율 운영 프로토콜입니다. Heartbeat마다 이 문서를 읽고 정확히 따릅니다.
 > **Self-Evolution 대상**: RETRO에서 발견한 개선은 이 문서를 직접 수정합니다.

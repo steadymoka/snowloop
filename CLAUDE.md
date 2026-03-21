@@ -16,7 +16,7 @@
 
 ```
 1. /snowloop:init          ← .snowloop/ 생성 및 모드 선택
-2. 모드 선택 (dev / plan)
+2. 모드 선택 (dev / design)
 3. /snowloop:heartbeat     ← 수동 실행
    또는
    /loop 10m /snowloop:heartbeat   ← 자동 반복 실행

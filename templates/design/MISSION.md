@@ -1,4 +1,4 @@
-<!-- EN: Plan mode mission template. Defines artifact-based DoD, output management structure, proactive work tiers, feedback system, and phase directives. -->
+<!-- EN: Design mode mission template. Defines artifact-based DoD, output management structure, proactive work tiers, feedback system, and phase directives. -->
 # Mission: {PROJECT_NAME}
 
 > {MISSION_DESCRIPTION}

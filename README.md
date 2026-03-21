@@ -18,7 +18,7 @@ The agent self-governs through a `.snowloop/` protocol and evolves its own proce
 ## Quick Start
 
 ```
-/snowloop:init                       # scaffold .snowloop/, choose mode (dev / plan)
+/snowloop:init                       # scaffold .snowloop/, choose mode (dev / design)
 /snowloop:heartbeat                  # run one autonomous cycle
 /loop 10m /snowloop:heartbeat        # auto-repeat every 10 minutes
 ```
@@ -27,7 +27,7 @@ The agent self-governs through a `.snowloop/` protocol and evolves its own proce
 
 | Skill | Description |
 |-------|-------------|
-| `/snowloop:init` | Initialize `.snowloop/` in your project. Choose dev or plan mode |
+| `/snowloop:init` | Initialize `.snowloop/` in your project. Choose dev or design mode |
 | `/snowloop:heartbeat` | Read PROTOCOL.md and execute one autonomous cycle |
 | `/snowloop:status` | Dashboard — heartbeat count, backlog depth, anomaly flags |
 | `/snowloop:retro` | Immediate retrospective — metrics, anomaly detection, protocol improvement proposals |
@@ -43,7 +43,7 @@ Build verification, testing strategy, and code patrol.
 - Proactive Work tiers: Health Audit → User Scenario → Integration Check → Code Patrol → Gap Analysis
 - Phase Directives: Building → Stabilizing → Shipping
 
-### Plan Mode
+### Design Mode
 
 Design iteration, artifact management, and feedback loops.
 

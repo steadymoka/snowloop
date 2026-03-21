@@ -24,7 +24,7 @@ allowed-tools: Read, Glob
 
 | 항목 | 값 |
 |------|-----|
-| Mode | {dev/plan} |
+| Mode | {dev/design} |
 | Heartbeat | #{n} |
 | Current Task | {task or 없음} |
 | Phase | {phase} |
