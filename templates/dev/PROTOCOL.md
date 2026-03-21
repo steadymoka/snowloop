@@ -1,3 +1,4 @@
+<!-- EN: Dev mode autonomous operation protocol. Defines heartbeat cycle, retrospective process, code patrol, sub-agent contracts, and self-evolution rules. -->
 # Protocol: Dev Mode
 
 > 이 파일은 자율 운영 프로토콜입니다. Heartbeat마다 이 문서를 읽고 정확히 따릅니다.

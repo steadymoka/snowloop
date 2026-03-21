@@ -1,3 +1,4 @@
+<!-- EN: Unified communication channel between human and agent (merged INBOX+OUTBOX). Direction tags: [→agent] for human-to-agent, [→human] for agent-to-human. -->
 # Communications
 > Human ↔ Agent 소통 채널
 > 방향 태그: `[→agent]` Human이 Agent에게 / `[→human]` Agent가 Human에게

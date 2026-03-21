@@ -1,3 +1,4 @@
+<!-- EN: Dev mode mission template. Defines 3-level DoD (build/functional/integration), testing strategy, proactive work tiers, and phase directives. -->
 # Mission: {PROJECT_NAME}
 
 > {MISSION_DESCRIPTION}

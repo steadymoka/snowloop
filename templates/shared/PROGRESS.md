@@ -1,3 +1,4 @@
+<!-- EN: Session state tracker: heartbeat count, current task, phase, and mode. -->
 # Progress
 > 현재 세션 상태를 추적합니다.
 
