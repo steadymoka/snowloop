@@ -90,6 +90,7 @@ Self-Evolution (RETRO에서 발견한 개선):
 ├── COMMS.md         # Human ↔ Agent 소통 (From Human / From Agent)
 ├── BACKLOG.md       # 작업 목록 (P0~P3)
 ├── PROGRESS.md      # 현재 heartbeat, 작업 상태
+├── MILESTONES.md    # 중기 목표 체크포인트 (active / done / dropped)
 ├── protocol/        # 에이전트 설정 (자주 보지 않음)
 │   ├── MISSION.md   # 미션 정의, DoD, Proactive Work
 │   ├── PROTOCOL.md  # 자율 운영 프로토콜 (self-evolution 대상)
@@ -118,8 +119,23 @@ RETRO(10 heartbeat마다 자동)에서 프로세스 개선을 발견하면 PROTO
 | Question | 프로세스 가정 질문 | 3회 반복 시 patch로 승격 |
 | Revert | 메트릭 악화 시 되돌림 | 자동 감지 + 되돌림 |
 
+### Milestones
+
+MISSION과 BACKLOG 사이의 중기 목표 체크포인트. `MILESTONES.md`에 정의합니다.
+
+```
+MISSION (장기) → Milestones (중기) → BACKLOG (단기)
+```
+
+- 에이전트가 태스크 완료 시마다 마일스톤 조건 충족 여부를 확인
+- 조건 충족 시 COMMS에 `[MILESTONE]` 태그로 알림 — human 승인 필요
+- 에이전트가 `[MILESTONE-PROPOSAL]`로 새 마일스톤 제안 가능
+- 10 HB 정체 시 status 경고, 20 HB 정체 시 retro anomaly → drop 제안
+- active 마일스톤 3개 이상이면 과부하 경고
+
 ### Anomaly Detection
 
+- **Milestone Stagnation**: active 마일스톤이 20+ heartbeat 동안 진전 없음
 - **Stagnation**: 같은 작업 3+ heartbeat 정체, 또는 idle 3연속
 - **Oscillation**: 같은 패치의 적용→revert 반복 (A→B→A 패턴)
 - **Regression**: 프로토콜 패치 후 메트릭 악화 (기존 문제와 구분)

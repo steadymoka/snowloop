@@ -90,6 +90,7 @@ Self-Evolution (improvements found in RETRO):
 ├── COMMS.md         # Human ↔ Agent communication (From Human / From Agent)
 ├── BACKLOG.md       # Task list (P0~P3 priority)
 ├── PROGRESS.md      # Current heartbeat count, task state
+├── MILESTONES.md    # Mid-term goal checkpoints (active / done / dropped)
 ├── protocol/        # Agent configuration (rarely viewed)
 │   ├── MISSION.md   # Mission definition, DoD, Proactive Work
 │   ├── PROTOCOL.md  # Autonomous operation protocol (self-evolution target)
@@ -118,8 +119,23 @@ Every 10 heartbeats, a retrospective runs automatically. When it discovers proce
 | Question | Challenge process assumptions | Escalate to patch after 3 repeats |
 | Revert | Metrics worsened after patch | Auto-detect + rollback |
 
+### Milestones
+
+Mid-term goal checkpoints between MISSION and BACKLOG. Defined in `MILESTONES.md`.
+
+```
+MISSION (long-term) → Milestones (mid-term) → BACKLOG (short-term)
+```
+
+- Agent checks milestone conditions on each task completion
+- Sends `[MILESTONE]` to COMMS when conditions appear met — human approval required
+- Agent can propose new milestones via `[MILESTONE-PROPOSAL]` in COMMS
+- Stagnation detected at 10 HB (status warning) and 20 HB (retro anomaly → suggest drop)
+- Active milestone overload alert when 3+ milestones are active simultaneously
+
 ### Anomaly Detection
 
+- **Milestone Stagnation**: Active milestone with no progress for 20+ heartbeats
 - **Stagnation**: Same task stuck for 3+ heartbeats, or 3 consecutive idle cycles
 - **Oscillation**: Same patch applied → reverted → applied again (A→B→A pattern)
 - **Regression**: Metrics worsened after a protocol patch (distinguished from pre-existing issues)
