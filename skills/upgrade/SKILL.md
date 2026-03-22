@@ -31,6 +31,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 - `.snowloop/protocol/EVOLUTION.md`
 - `.snowloop/logs/backlog-archive/INDEX.md`
 - `.snowloop/output/` 디렉토리 + `INDEX.md` (design 모드만)
+- `.snowloop/MILESTONES.md`
 - 향후 추가될 새 파일
 
 #### 2b: PROTOCOL.md 새 섹션 감지
@@ -59,7 +60,7 @@ v{old} → v{new}
 - (또는 "변경 없음")
 
 ### 건드리지 않는 파일
-logs/LOG, logs/RETRO, BACKLOG, COMMS, PROGRESS, protocol/EVOLUTION(기존 내용),
+logs/LOG, logs/RETRO, BACKLOG, COMMS, PROGRESS, MILESTONES(기존 내용), protocol/EVOLUTION(기존 내용),
 protocol/MISSION, protocol/PROTOCOL(기존 섹션), logs/backlog-archive/, logs/archive/, output/(기존 산출물)
 ```
 
