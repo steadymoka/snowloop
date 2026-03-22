@@ -23,6 +23,7 @@
   - PROGRESS.md에 현재 작업 갱신
   - DoD 기준 충족 확인 (protocol/MISSION.md 참조)
   - 완료 시 BACKLOG에서 `[x]` 체크
+  - **Milestone 체크**: MILESTONES.md의 active Milestone 조건 확인 (아래 "Milestone" 섹션 참조)
 - **BACKLOG 비어 있음**: Proactive Work 실행 (protocol/MISSION.md 참조)
   - 발견한 이슈/아이디어는 BACKLOG에 새 티켓으로 등록
 
@@ -54,6 +55,8 @@
 | `[LATERAL-THINK]` | 3 heartbeat | 옵션 A(현상 유지)로 자동 선택 |
 | 일반 질문 | 3 heartbeat | 스킵 |
 | 방향 전환 제안 | 5 heartbeat | 삭제 |
+| `[MILESTONE]` | 5 heartbeat | 삭제 (동일 Milestone 10 HB 재전송 금지) |
+| `[MILESTONE-PROPOSAL]` | 3 heartbeat | 삭제 |
 
 자동 처리 시:
 1. `From Agent`에서 해당 항목 삭제
@@ -187,3 +190,28 @@ RETRO에서 시스템적 개선(일회성 수정이 아닌 반복 패턴)을 발
 - Proactive Work 단계 제거 금지
 - RETRO 주기 연장 금지
 - 위 3가지는 human 명시 승인 없이 변경 불가
+
+---
+
+## Milestone
+
+### Milestone 체크
+- BACKLOG 태스크를 완료(`[x]`)한 직후, MILESTONES.md의 active Milestone 조건을 확인한다.
+- active Milestone이 없으면 스킵.
+- 조건을 충족했다고 판단되면:
+  1. COMMS `From Agent`에 `[MILESTONE]` 태그로 완료 확인 요청
+     예: `[MILESTONE] M1 "MVP 완성" 조건이 충족된 것으로 보입니다. 확인해주세요.`
+  2. 사람이 승인하면 → MILESTONES.md Status를 `done`, Done에 날짜 기록, LOG에 기록
+  3. 사람이 거절하면 → 피드백 반영, 필요시 조건 수정
+- `[MILESTONE]` 자동 삭제 후 재전송 방지: 동일 Milestone에 대해 `[MILESTONE]`이 자동 삭제된 경우, 10 HB 동안 재전송하지 않는다. LOG에 "M{n} 조건 충족 판단했으나 응답 없음"을 기록하고 계속 작업한다.
+
+### Milestone 제안
+- Proactive Work(Gap Analysis 등)에서 새 Milestone이 필요하다고 판단되면:
+  1. COMMS `From Agent`에 `[MILESTONE-PROPOSAL]` 태그로 제안
+     예: `[MILESTONE-PROPOSAL] M2 "API 안정화" — 조건: 모든 엔드포인트 에러율 1% 미만, 응답 시간 200ms 이내`
+  2. 사람이 승인 → MILESTONES.md에 추가
+  3. 응답 없으면 3 HB 후 삭제 (일반 질문과 동일)
+
+### dropped 처리
+- 사람이 직접 Status를 `dropped`로 변경하거나, 에이전트가 COMMS `From Agent`에서 drop을 제안한다 (일반 질문과 동일, 3 HB 후 삭제)
+- RETRO에서 Milestone 정체 anomaly 감지 시 에이전트가 drop 제안을 할 수 있다
