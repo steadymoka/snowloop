@@ -2,11 +2,20 @@
   <a href="./README.md">English</a> | <strong>한국어</strong>
 </p>
 
-# snowloop
+<h1 align="center">
+  <code>❄ snowloop</code>
+</h1>
 
-Claude Code용 자율 에이전트 운영 플러그인.
+<p align="center">
+  <a href="https://github.com/steadymoka/snowloop/releases"><img src="https://img.shields.io/badge/version-0.2.2-818cf8?style=flat-square" alt="version" /></a>
+  <a href="https://github.com/steadymoka/snowloop/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-38bdf8?style=flat-square" alt="license" /></a>
+  <img src="https://img.shields.io/badge/platform-Claude_Code-6366f1?style=flat-square" alt="platform" />
+</p>
 
-`.snowloop/` 프로토콜을 통해 에이전트가 자율 운영하고, 스스로 프로토콜을 진화시킵니다.
+<p align="center">
+  Claude Code용 자율 에이전트 운영 플러그인.<br/>
+  <code>.snowloop/</code> 프로토콜을 통해 에이전트가 자율 운영하고, 스스로 프로토콜을 진화시킵니다.
+</p>
 
 ## 설치
 

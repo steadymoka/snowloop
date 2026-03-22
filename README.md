@@ -2,11 +2,20 @@
   <strong>English</strong> | <a href="./README.ko.md">한국어</a>
 </p>
 
-# snowloop
+<h1 align="center">
+  <code>❄ snowloop</code>
+</h1>
 
-Autonomous agent orchestration plugin for Claude Code.
+<p align="center">
+  <a href="https://github.com/steadymoka/snowloop/releases"><img src="https://img.shields.io/badge/version-0.2.2-818cf8?style=flat-square" alt="version" /></a>
+  <a href="https://github.com/steadymoka/snowloop/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-38bdf8?style=flat-square" alt="license" /></a>
+  <img src="https://img.shields.io/badge/platform-Claude_Code-6366f1?style=flat-square" alt="platform" />
+</p>
 
-The agent self-governs through a `.snowloop/` protocol and evolves its own process over time.
+<p align="center">
+  Autonomous agent orchestration plugin for Claude Code.<br/>
+  The agent self-governs through a <code>.snowloop/</code> protocol and evolves its own process over time.
+</p>
 
 ## Install
 
