@@ -18,6 +18,7 @@ allowed-tools: Read, Write, Edit, Glob
 - `.snowloop/logs/RETRO.md` — 이전 RETRO 기록들 (패턴 분석용)
 - `.snowloop/protocol/EVOLUTION.md` — 프로토콜 변경 이력
 - `.snowloop/PROGRESS.md` — 현재 heartbeat 수
+- `.snowloop/MILESTONES.md` — active/done Milestone 상태 및 생성일
 
 ### 2. 메트릭 산출
 
@@ -53,6 +54,11 @@ allowed-tools: Read, Write, Edit, Glob
 - 현재 heartbeat 주기, Proactive Work 순서, RETRO 빈도 등에 대한 질문 생성
 - 이전 RETRO의 Wonder 질문과 비교 → 반복되는 질문 식별
 
+#### E. Milestone Stagnation
+- active Milestone이 20 HB 이상 변화 없으면 (생성 이후 `[MILESTONE]` COMMS 없고 Status 변경 없음):
+  "MILESTONE STAGNATION: M{n} '{title}'이 {n} HB째 변화 없음. 방향 재검토 또는 drop을 제안합니다."
+- status의 10 HB 조기 경고보다 상위 단계. retro에서 구조적으로 다루며, COMMS `From Agent`에 drop 또는 조건 재정의를 제안한다.
+
 ### 4. RETRO 기록
 
 `logs/RETRO.md`의 **맨 위**에 추가 (최신이 위):
@@ -81,6 +87,9 @@ allowed-tools: Read, Write, Edit, Glob
 
 ### 프로세스 질문 (Wonder)
 - {gap analysis 결과}
+
+### Milestone 진행
+- {각 active/done Milestone의 상태와 경과 HB 또는 완료일}
 
 ### 액션
 - [ ] {개선 액션들}
