@@ -78,14 +78,24 @@ Self-Evolution (RETRO에서 발견한 개선):
 
 ```
 .snowloop/
-├── MISSION.md       # 미션 정의, DoD, Proactive Work
-├── PROTOCOL.md      # 자율 운영 프로토콜 (self-evolution 대상)
 ├── COMMS.md         # Human ↔ Agent 소통 ([→agent] / [→human])
 ├── BACKLOG.md       # 작업 목록 (P0~P3)
 ├── PROGRESS.md      # 현재 heartbeat, 작업 상태
-├── LOG.md           # 작업 이력
-├── RETRO.md         # 회고 기록
-└── EVOLUTION.md     # 프로토콜 변경 이력
+├── protocol/        # 에이전트 설정 (자주 보지 않음)
+│   ├── MISSION.md   # 미션 정의, DoD, Proactive Work
+│   ├── PROTOCOL.md  # 자율 운영 프로토콜 (self-evolution 대상)
+│   └── EVOLUTION.md # 프로토콜 변경 이력
+├── logs/            # 기록
+│   ├── LOG.md       # 작업 이력
+│   ├── RETRO.md     # 회고 기록
+│   ├── archive/     # 오래된 LOG 아카이브
+│   └── backlog-archive/
+│       └── INDEX.md
+└── output/          # 기획 모드 산출물
+    ├── specs/
+    ├── wireframes/
+    ├── research/
+    └── INDEX.md
 ```
 
 ## Self-Evolution

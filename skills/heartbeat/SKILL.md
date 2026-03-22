@@ -1,6 +1,6 @@
 ---
 name: heartbeat
-description: "Execute one autonomous heartbeat cycle. Reads .snowloop/PROTOCOL.md and follows it exactly. Use with /loop for continuous operation."
+description: "Execute one autonomous heartbeat cycle. Reads .snowloop/protocol/PROTOCOL.md and follows it exactly. Use with /loop for continuous operation."
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent
 ---
 
@@ -8,13 +8,13 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent
 
 ## 실행 절차
 
-1. `.snowloop/PROTOCOL.md` 파일을 읽습니다
+1. `.snowloop/protocol/PROTOCOL.md` 파일을 읽습니다
 2. PROTOCOL.md의 "Heartbeat Cycle" 섹션을 **정확히** 따릅니다
 3. 각 단계(상태 확인 → 작업 실행 → 기록 → RETRO 체크 → COMMS 정리 → LOG 아카이브)를 순서대로 실행합니다
 
 ## 에러 핸들링
 
-- `.snowloop/PROTOCOL.md`가 없으면: "snowloop이 초기화되지 않았습니다. `/snowloop:init`을 먼저 실행하세요." 출력 후 종료
+- `.snowloop/protocol/PROTOCOL.md`가 없으면: "snowloop이 초기화되지 않았습니다. `/snowloop:init`을 먼저 실행하세요." 출력 후 종료
 - `.snowloop/PROGRESS.md`가 없으면: 위와 동일
 - 작업 실행 중 에러 발생 시: LOG에 에러 기록, 다음 heartbeat로 넘기기
 

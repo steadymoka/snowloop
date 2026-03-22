@@ -40,7 +40,7 @@
 1. **Health Audit**: 빌드/테스트/린트 실행, 미해결 경고 정리
 2. **User Scenario Walkthrough**: 핵심 사용자 플로우를 시뮬레이션하며 갭 발견
 3. **Integration Check**: 모듈 간 계약(인터페이스, 타입, API) 정합성 확인
-4. **Code Patrol**: 변경 이력 기반 코드 품질 점검 (PROTOCOL.md의 Code Patrol 절차 따름)
+4. **Code Patrol**: 변경 이력 기반 코드 품질 점검 (protocol/PROTOCOL.md의 Code Patrol 절차 따름)
 5. **Gap Analysis**: MISSION 대비 미구현/미검증 영역 식별
 
 ---

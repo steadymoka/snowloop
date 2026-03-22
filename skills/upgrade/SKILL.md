@@ -28,13 +28,13 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 현재 플러그인 템플릿에 있지만 프로젝트에 없는 파일 목록 작성.
 
 체크 대상:
-- `.snowloop/EVOLUTION.md`
-- `.snowloop/backlog-archive/INDEX.md`
+- `.snowloop/protocol/EVOLUTION.md`
+- `.snowloop/logs/backlog-archive/INDEX.md`
 - `.snowloop/output/` 디렉토리 + `INDEX.md` (design 모드만)
 - 향후 추가될 새 파일
 
 #### 2b: PROTOCOL.md 새 섹션 감지
-1. `.snowloop/PROTOCOL.md`를 `## ` 기준으로 섹션 헤딩 추출
+1. `.snowloop/protocol/PROTOCOL.md`를 `## ` 기준으로 섹션 헤딩 추출
 2. 모드별 템플릿 `${CLAUDE_SKILL_DIR}/../../templates/{mode}/PROTOCOL.md`를 같은 방식으로 추출
 3. 템플릿에 있지만 사용자 파일에 없는 `## ` 헤딩 = 추가 대상
 
@@ -47,7 +47,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 v{old} → v{new}
 
 ### 새 파일 생성
-- .snowloop/EVOLUTION.md
+- .snowloop/protocol/EVOLUTION.md
 - (또는 "없음")
 
 ### PROTOCOL.md 새 섹션
@@ -59,8 +59,8 @@ v{old} → v{new}
 - (또는 "변경 없음")
 
 ### 건드리지 않는 파일
-LOG, RETRO, BACKLOG, COMMS, PROGRESS, EVOLUTION(기존 내용),
-MISSION, PROTOCOL(기존 섹션), backlog-archive/, logs/, output/(기존 산출물)
+logs/LOG, logs/RETRO, BACKLOG, COMMS, PROGRESS, protocol/EVOLUTION(기존 내용),
+protocol/MISSION, protocol/PROTOCOL(기존 섹션), logs/backlog-archive/, logs/archive/, output/(기존 산출물)
 ```
 
 사용자에게 확인을 요청합니다. 거부하면 종료.
@@ -72,7 +72,7 @@ MISSION, PROTOCOL(기존 섹션), backlog-archive/, logs/, output/(기존 산출
 - design 모드: output 디렉토리 구조 생성 (없는 경우)
 
 #### 3b: PROTOCOL.md 섹션 추가
-- 템플릿에만 있는 새 섹션을 `.snowloop/PROTOCOL.md` 끝에 append
+- 템플릿에만 있는 새 섹션을 `.snowloop/protocol/PROTOCOL.md` 끝에 append
 - 각 섹션 앞에 `---` 구분자 추가
 - 기존 내용은 절대 수정하지 않음
 - self-evolution이 다음 RETRO에서 정리함
@@ -100,7 +100,7 @@ MISSION, PROTOCOL(기존 섹션), backlog-archive/, logs/, output/(기존 산출
 
 ### Step 4: EVOLUTION.md 기록
 
-EVOLUTION.md 테이블에 행 추가:
+`protocol/EVOLUTION.md` 테이블에 행 추가:
 ```
 | {next_seq} | - | upgrade | snowloop v{old} → v{new} | Plugin upgrade | applied |
 ```
@@ -116,13 +116,13 @@ v{old} → v{new}
 - {각 항목 요약}
 
 ### 다음 단계
-- PROTOCOL.md에 새로 추가된 섹션을 확인하세요
+- protocol/PROTOCOL.md에 새로 추가된 섹션을 확인하세요
 - 다음 RETRO에서 self-evolution이 새 섹션을 평가합니다
 ```
 
 ## 주의사항
-- 사용자 데이터 파일(LOG, RETRO, BACKLOG, COMMS, PROGRESS, EVOLUTION 기존 내용)은 절대 수정하지 않습니다
-- PROTOCOL.md는 새 섹션만 append합니다. 기존 섹션은 건드리지 않습니다
-- MISSION.md는 수정하지 않습니다 (사용자 커스텀 값 보존)
+- 사용자 데이터 파일(logs/LOG, logs/RETRO, BACKLOG, COMMS, PROGRESS, protocol/EVOLUTION 기존 내용)은 절대 수정하지 않습니다
+- protocol/PROTOCOL.md는 새 섹션만 append합니다. 기존 섹션은 건드리지 않습니다
+- protocol/MISSION.md는 수정하지 않습니다 (사용자 커스텀 값 보존)
 - `.version` 파일은 반드시 마지막에 Write합니다
 - Dry run에서 사용자가 거부하면 아무 것도 변경하지 않습니다

@@ -12,10 +12,10 @@ allowed-tools: Read, Glob
 다음 파일을 읽습니다:
 - `.snowloop/PROGRESS.md` — 현재 heartbeat, 현재 작업, 모드
 - `.snowloop/BACKLOG.md` — 백로그 깊이 (미완료 티켓 수)
-- `.snowloop/LOG.md` — 최근 3개 heartbeat 기록
-- `.snowloop/RETRO.md` — 최신 RETRO (있으면)
+- `.snowloop/logs/LOG.md` — 최근 3개 heartbeat 기록
+- `.snowloop/logs/RETRO.md` — 최신 RETRO (있으면)
 - `.snowloop/COMMS.md` — Pending 메시지 수
-- `.snowloop/EVOLUTION.md` — 최근 프로토콜 변경 (있으면)
+- `.snowloop/protocol/EVOLUTION.md` — 최근 프로토콜 변경 (있으면)
 
 ### 2. 대시보드 출력
 

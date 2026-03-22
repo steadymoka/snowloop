@@ -13,10 +13,10 @@ allowed-tools: Read, Write, Edit, Glob
 ### 1. 데이터 수집
 
 다음 파일을 읽습니다:
-- `.snowloop/LOG.md` — 전체 (또는 최근 10개 heartbeat)
+- `.snowloop/logs/LOG.md` — 전체 (또는 최근 10개 heartbeat)
 - `.snowloop/BACKLOG.md` — 현재 백로그 상태
-- `.snowloop/RETRO.md` — 이전 RETRO 기록들 (패턴 분석용)
-- `.snowloop/EVOLUTION.md` — 프로토콜 변경 이력
+- `.snowloop/logs/RETRO.md` — 이전 RETRO 기록들 (패턴 분석용)
+- `.snowloop/protocol/EVOLUTION.md` — 프로토콜 변경 이력
 - `.snowloop/PROGRESS.md` — 현재 heartbeat 수
 
 ### 2. 메트릭 산출
@@ -55,7 +55,7 @@ allowed-tools: Read, Write, Edit, Glob
 
 ### 4. RETRO 기록
 
-RETRO.md의 **맨 위**에 추가 (최신이 위):
+`logs/RETRO.md`의 **맨 위**에 추가 (최신이 위):
 
 ```markdown
 ## RETRO #{n} — HB#{start}~#{end} — {date}
@@ -88,14 +88,14 @@ RETRO.md의 **맨 위**에 추가 (최신이 위):
 
 ### 5. EVOLUTION.md 갱신
 
-- Anomaly에서 프로토콜 개선이 필요한 경우 → EVOLUTION.md에 행 추가
+- Anomaly에서 프로토콜 개선이 필요한 경우 → `protocol/EVOLUTION.md`에 행 추가
 - Wonder에서 반복되는 질문 → `question` 타입으로 기록
-- Regression 감지 시 → revert 행 추가 + PROTOCOL.md 되돌림 제안
+- Regression 감지 시 → revert 행 추가 + `protocol/PROTOCOL.md` 되돌림 제안
 
 ### 6. 프로토콜 패치 제안
 
 Anomaly 또는 Wonder에서 프로토콜 변경이 필요하다고 판단되면:
-- **Parameter patch**: PROTOCOL.md에 직접 적용 + EVOLUTION.md 기록
+- **Parameter patch**: `protocol/PROTOCOL.md`에 직접 적용 + `protocol/EVOLUTION.md` 기록
 - **Structural patch**: COMMS에 `[→human] [PROTOCOL-PATCH]` 제안
 
 ### 7. 결과 출력

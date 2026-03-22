@@ -78,14 +78,24 @@ Self-Evolution (improvements found in RETRO):
 
 ```
 .snowloop/
-├── MISSION.md       # Mission definition, DoD, Proactive Work
-├── PROTOCOL.md      # Autonomous operation protocol (self-evolution target)
 ├── COMMS.md         # Human ↔ Agent communication ([→agent] / [→human])
 ├── BACKLOG.md       # Task list (P0~P3 priority)
 ├── PROGRESS.md      # Current heartbeat count, task state
-├── LOG.md           # Work history
-├── RETRO.md         # Retrospective records
-└── EVOLUTION.md     # Protocol change history
+├── protocol/        # Agent configuration (rarely viewed)
+│   ├── MISSION.md   # Mission definition, DoD, Proactive Work
+│   ├── PROTOCOL.md  # Autonomous operation protocol (self-evolution target)
+│   └── EVOLUTION.md # Protocol change history
+├── logs/            # Records
+│   ├── LOG.md       # Work history
+│   ├── RETRO.md     # Retrospective records
+│   ├── archive/     # Old LOG archives
+│   └── backlog-archive/
+│       └── INDEX.md
+└── output/          # Design mode artifacts
+    ├── specs/
+    ├── wireframes/
+    ├── research/
+    └── INDEX.md
 ```
 
 ## Self-Evolution
