@@ -16,6 +16,7 @@ allowed-tools: Read, Glob
 - `.snowloop/logs/RETRO.md` — 최신 RETRO (있으면)
 - `.snowloop/COMMS.md` — From Human / From Agent 메시지 수
 - `.snowloop/protocol/EVOLUTION.md` — 최근 프로토콜 변경 (있으면)
+- `.snowloop/MILESTONES.md` — Milestone 상태 (active/done/dropped 수)
 
 ### 2. 대시보드 출력
 
@@ -29,6 +30,7 @@ allowed-tools: Read, Glob
 | Current Task | {task or 없음} |
 | Phase | {phase} |
 | Backlog | {n}개 (P0: {n}, P1: {n}, P2: {n}, P3: {n}) |
+| Milestones | active: {n}개, done: {n}개 |
 | COMMS | From Human: {n}개, From Agent: {n}개 |
 | Last RETRO | #{n} (ratio: {n}%) |
 | Protocol Patches | {n}개 (applied: {n}, reverted: {n}) |
@@ -48,6 +50,8 @@ allowed-tools: Read, Glob
 - **오래된 COMMS**: From Agent에 3 heartbeat 이상 된 메시지 → "미응답 메시지가 있습니다"
 - **Stagnation**: 같은 task가 3 heartbeat 이상 → "동일 작업 장기 진행 중"
 - **미응답 Protocol Patch**: COMMS에 `[PROTOCOL-PATCH]`가 1 heartbeat 이상 대기 → "프로토콜 패치 대기 중"
+- **Milestone 과부하**: active Milestone 3개 이상 → "Milestone이 너무 많습니다 (active: {n}개)"
+- **Milestone 정체**: active Milestone이 있는데 10 HB 동안 해당 Milestone 관련 `[MILESTONE]` COMMS가 없고 BACKLOG 태스크 완료도 없음 → "Milestone 정체: 진전 없이 10 HB 경과"
 
 ## 에러 핸들링
 
