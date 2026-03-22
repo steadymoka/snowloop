@@ -78,7 +78,7 @@ Self-Evolution (improvements found in RETRO):
 
 ```
 .snowloop/
-├── COMMS.md         # Human ↔ Agent communication ([→agent] / [→human])
+├── COMMS.md         # Human ↔ Agent communication (From Human / From Agent)
 ├── BACKLOG.md       # Task list (P0~P3 priority)
 ├── PROGRESS.md      # Current heartbeat count, task state
 ├── protocol/        # Agent configuration (rarely viewed)

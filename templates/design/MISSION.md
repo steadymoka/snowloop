@@ -82,7 +82,7 @@
   "votes": []
 }
 ```
-COMMS에 `[→human]` 투표 요청 → 응답 반영
+COMMS `From Agent`에 투표 요청 → 응답 반영
 
 ---
 

@@ -96,7 +96,7 @@ allowed-tools: Read, Write, Edit, Glob
 
 Anomaly 또는 Wonder에서 프로토콜 변경이 필요하다고 판단되면:
 - **Parameter patch**: `protocol/PROTOCOL.md`에 직접 적용 + `protocol/EVOLUTION.md` 기록
-- **Structural patch**: COMMS에 `[→human] [PROTOCOL-PATCH]` 제안
+- **Structural patch**: COMMS `From Agent`에 `[PROTOCOL-PATCH]` 제안
 
 ### 7. 결과 출력
 

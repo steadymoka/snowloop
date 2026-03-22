@@ -1,13 +1,16 @@
-<!-- EN: Unified communication channel between human and agent (merged INBOX+OUTBOX). Direction tags: [→agent] for human-to-agent, [→human] for agent-to-human. -->
+<!-- EN: Communication channel between human and agent. Messages are deleted after processing. Auto-resolved section shows autonomous decisions for human review. -->
 # Communications
 > Human ↔ Agent 소통 채널
-> 방향 태그: `[→agent]` Human이 Agent에게 / `[→human]` Agent가 Human에게
-> 처리 완료 시 Processed로 이동합니다. Heartbeat에서 자동 정리됩니다.
+> 처리 완료된 메시지는 삭제됩니다. 자동 결정된 항목은 Auto-resolved에 표시됩니다.
 
-### Pending
+### From Human
 
 (비어 있음)
 
-### Processed
+### From Agent
+
+(비어 있음)
+
+### Auto-resolved
 
 (비어 있음)

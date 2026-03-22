@@ -78,7 +78,7 @@ Self-Evolution (RETRO에서 발견한 개선):
 
 ```
 .snowloop/
-├── COMMS.md         # Human ↔ Agent 소통 ([→agent] / [→human])
+├── COMMS.md         # Human ↔ Agent 소통 (From Human / From Agent)
 ├── BACKLOG.md       # 작업 목록 (P0~P3)
 ├── PROGRESS.md      # 현재 heartbeat, 작업 상태
 ├── protocol/        # 에이전트 설정 (자주 보지 않음)

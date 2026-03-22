@@ -12,11 +12,13 @@
 
 ### 1. 상태 확인
 1. PROGRESS.md 읽기 → 현재 heartbeat 수, 현재 작업 확인
-2. COMMS.md의 Pending 섹션 확인 → `[→agent]` 메시지가 있으면 최우선 처리
+2. COMMS.md 확인:
+   - `From Human` 메시지가 있으면 최우선 처리
+   - `From Agent` 미응답 메시지의 대기 heartbeat 수 확인 (아래 "COMMS 미응답 규칙" 참조)
 3. BACKLOG.md 읽기 → 다음 작업 결정
 
 ### 2. 작업 실행
-- **COMMS 메시지 있음**: 메시지 지시에 따라 행동. 완료 후 Processed로 이동
+- **From Human 메시지 있음**: 메시지 지시에 따라 행동. 완료 후 해당 항목 삭제
 - **BACKLOG 티켓 있음**: 최고 우선순위 티켓 선택, 작업 실행
   - PROGRESS.md에 현재 작업 갱신
   - DoD 기준 충족 확인 (protocol/MISSION.md 참조)
@@ -43,8 +45,23 @@
 ### 5. RETRO 체크
 - heartbeat 카운트가 10의 배수이면 → RETRO 실행 (아래 "회고 프로토콜" 참조)
 
-### 6. COMMS 정리
-- Processed 섹션에서 5개 초과 항목 삭제 (오래된 것부터)
+### 6. COMMS 미응답 처리
+`From Agent` 메시지의 대기 heartbeat 수를 확인하고 자동 처리:
+
+| 태그 | 미응답 기준 | 자동 처리 |
+|------|-------------|-----------|
+| `[PROTOCOL-PATCH]` | 1 heartbeat | 자동승인 → 적용 |
+| `[LATERAL-THINK]` | 3 heartbeat | 옵션 A(현상 유지)로 자동 선택 |
+| 일반 질문 | 3 heartbeat | 스킵 |
+| 방향 전환 제안 | 5 heartbeat | 삭제 |
+
+자동 처리 시:
+1. `From Agent`에서 해당 항목 삭제
+2. `Auto-resolved`에 추가: `{원본 내용} → {자동 처리 결과} (HB#{n})`
+3. logs/LOG.md에 기록
+
+> `Auto-resolved` 항목은 사용자만 삭제합니다. 에이전트가 임의로 삭제하지 않습니다.
+> 사용자가 이의 있으면 `From Human`에 작성하여 되돌릴 수 있습니다.
 
 ### 7. LOG 아카이브
 - logs/LOG.md 항목이 50개 초과 시 → `.snowloop/logs/archive/log-{date}.md`로 이동
@@ -63,7 +80,7 @@
 
 ### Stagnation Detection
 - **Spinning**: 같은 산출물을 3 heartbeat 이상 수정 → 완성 기준 재점검
-- **Idle streak**: idle 3연속 → COMMS에 `[→human]` 방향 전환 제안
+- **Idle streak**: idle 3연속 → COMMS `From Agent`에 방향 전환 제안
 - **Declining productivity**: 3개 연속 RETRO에서 productive_ratio 하락 → 전략 재검토 제안
 
 ### Oscillation Detection
@@ -116,7 +133,7 @@ logs/RETRO.md에 추가:
 ### 이터레이션 사이클
 1. **초안 생성**: drafts/에 빠르게 작성
 2. **자가 검토**: protocol/MISSION.md의 DoD 기준으로 점검
-3. **피드백 요청**: COMMS에 `[→human]` 리뷰 요청
+3. **피드백 요청**: COMMS `From Agent`에 리뷰 요청
 4. **반영**: 피드백 기반 수정
 5. **확정**: 카테고리 폴더로 이동, INDEX 갱신
 
@@ -151,7 +168,8 @@ RETRO에서 시스템적 개선(일회성 수정이 아닌 반복 패턴)을 발
    - protocol/EVOLUTION.md에 기록 (Status: applied)
    - logs/LOG.md에 "Protocol-patch: {변경 요약}" 기록
 3. **Structural patch** (단계 추가/제거, 새 규칙):
-   - COMMS에 `[→human] [PROTOCOL-PATCH]` 태그로 제안
+   - COMMS `From Agent`에 `[PROTOCOL-PATCH]` 태그로 제안
+   - 미응답 시 COMMS 미응답 규칙에 따라 자동승인
    - 자동승인: 1 heartbeat 대기 후 인간 반응 없으면 적용
    - 적용 시 protocol/EVOLUTION.md 기록
 4. **Question** (프로세스 가정에 대한 질문):
@@ -162,7 +180,7 @@ RETRO에서 시스템적 개선(일회성 수정이 아닌 반복 패턴)을 발
    - 되돌림 사유를 Reason에 기록
 6. **Oscillation 탈출**: 같은 패치의 적용→revert가 2회 반복되면
    - 해당 영역은 parameter-patch 불가로 판정
-   - COMMS에 `[→human] [LATERAL-THINK]` 태그로 구조적 재설계 제안
+   - COMMS `From Agent`에 `[LATERAL-THINK]` 태그로 구조적 재설계 제안
 
 ### Safety Rails
 - DoD 기준 하향 금지
