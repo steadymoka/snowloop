@@ -11,6 +11,7 @@
 | `/snowloop:status` | 현재 세션 상태를 요약합니다 (진행 중 태스크, heartbeat 수, 미처리 메시지). |
 | `/snowloop:retro` | 회고를 즉시 실행합니다. 무엇이 잘 됐고, 무엇을 개선할지 기록합니다. |
 | `/snowloop:evolve` | 프로토콜 자체를 개선합니다 — 템플릿, 훅, 스킬을 수정하고 버전을 올립니다. |
+| `/snowloop:upgrade` | 기존 .snowloop/ 프로젝트를 최신 플러그인 버전으로 업그레이드합니다. |
 
 ## Quick Start
 

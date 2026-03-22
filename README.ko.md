@@ -42,6 +42,7 @@ claude --dangerously-skip-permissions
 | `/snowloop:status` | 현재 상태 대시보드 — heartbeat 수, 백로그, 이상 징후 |
 | `/snowloop:retro` | 즉시 회고 — 메트릭 산출, anomaly 탐지, 프로토콜 개선 제안 |
 | `/snowloop:evolve` | 프로토콜 진화 분석 — 패치 효과 비교, lateral thinking 옵션 |
+| `/snowloop:upgrade` | 기존 .snowloop/ 프로젝트를 최신 플러그인 버전으로 업그레이드 |
 
 ## 모드
 

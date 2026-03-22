@@ -35,6 +35,19 @@ mkdir -p .snowloop/logs
 mkdir -p .snowloop/backlog-archive
 ```
 
+**`.snowloop/.version`** 생성:
+- `${CLAUDE_SKILL_DIR}/../../.claude-plugin/plugin.json`에서 version 읽기
+- Write:
+```json
+{
+  "version": "{plugin_version}",
+  "mode": "{mode}",
+  "initialized_at": "{현재 ISO 타임스탬프}",
+  "upgraded_at": null,
+  "upgrade_history": []
+}
+```
+
 design 모드인 경우 추가:
 ```bash
 mkdir -p .snowloop/output/specs

@@ -42,6 +42,7 @@ The `guard.py` hook (installed by `/snowloop:init`) blocks file modifications ou
 | `/snowloop:status` | Dashboard — heartbeat count, backlog depth, anomaly flags |
 | `/snowloop:retro` | Immediate retrospective — metrics, anomaly detection, protocol improvement proposals |
 | `/snowloop:evolve` | Protocol evolution analysis — patch effectiveness, lateral thinking options |
+| `/snowloop:upgrade` | Upgrade existing `.snowloop/` to match current plugin version |
 
 ## Modes
 
