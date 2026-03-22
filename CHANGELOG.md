@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1] - 2026-03-22
+
+### Changed
+
+- Redesign COMMS: replace direction tags with `From Human` / `From Agent` sections
+- Replace `Pending`/`Processed` with delete-on-process + `Auto-resolved` section
+- Add auto-resolve rules for unanswered agent messages (1~5 heartbeat timeouts)
+
 ## [0.2.0] - 2026-03-22
 
 ### Added
