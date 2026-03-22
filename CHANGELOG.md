@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.2.0] - 2026-03-22
+
+### Added
+
+- `/snowloop:upgrade` skill for upgrading existing projects to new plugin versions
+- `.snowloop/.version` tracking file (written during init)
+- `.upgrade-backup/` to gitignore snippet
+
+### Changed
+
+- Reorganize `.snowloop/` directory structure (8 root files → 3 + subfolders)
+  - `protocol/`: MISSION.md, PROTOCOL.md, EVOLUTION.md
+  - `logs/`: LOG.md, RETRO.md, archive/, backlog-archive/
+  - Root: COMMS.md, BACKLOG.md, PROGRESS.md only
+- Autonomous mode documentation with `--dangerously-skip-permissions`
+
 ## [0.1.1] - 2026-03-21
 
 ### Changed
