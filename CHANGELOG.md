@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- `From Human (CLARIFY)` section in COMMS — vague requests are refined before execution (structured interpretation → [CLARIFY] tag → 1 HB auto-resolve)
+- `[CLARIFY]` auto-resolve rule in COMMS timeout table (1 heartbeat)
+
+### Changed
+
+- State check step now mandates **Read tool** for all files (PROGRESS, COMMS, BACKLOG) — prevents context cache from masking new human messages
+- Applied to both dev and design mode PROTOCOL.md templates
+
 ## [0.2.1] - 2026-03-22
 
 ### Changed

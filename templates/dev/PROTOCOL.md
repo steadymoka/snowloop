@@ -11,14 +11,23 @@
 매 heartbeat에서 다음을 순서대로 실행합니다:
 
 ### 1. 상태 확인
-1. PROGRESS.md 읽기 → 현재 heartbeat 수, 현재 작업 확인
-2. COMMS.md 확인:
+> 모든 파일은 **Read 도구로** 읽는다. 이전 context의 캐시를 신뢰하지 않는다.
+
+1. **Read 도구로** PROGRESS.md 읽기 → 현재 heartbeat 수, 현재 작업 확인
+2. **Read 도구로** COMMS.md 읽기:
    - `From Human` 메시지가 있으면 최우선 처리
+   - `From Human (CLARIFY)` 메시지가 있으면 CLARIFY 절차 실행 (아래 참조)
    - `From Agent` 미응답 메시지의 대기 heartbeat 수 확인 (아래 "COMMS 미응답 규칙" 참조)
-3. BACKLOG.md 읽기 → 다음 작업 결정
+3. **Read 도구로** BACKLOG.md 읽기 → 다음 작업 결정
 
 ### 2. 작업 실행
 - **From Human 메시지 있음**: 메시지 지시에 따라 행동. 완료 후 해당 항목 삭제
+- **From Human (CLARIFY) 메시지 있음**: CLARIFY 절차 실행
+  1. 메시지를 구조화: **현재 상태** / **해석** / **구현 계획**
+  2. COMMS `From Agent`에 `[CLARIFY]` 태그로 게시
+  3. `From Human (CLARIFY)`에서 원본 메시지 삭제
+  4. 1 HB 무응답 시 해석대로 진행 (auto-resolve)
+  5. 사람이 수정하면 반영 후 진행
 - **BACKLOG 티켓 있음**: 최고 우선순위 티켓 선택, 작업 실행
   - PROGRESS.md에 현재 작업 갱신
   - DoD 기준 충족 확인 (protocol/MISSION.md 참조)
@@ -45,6 +54,7 @@
 
 | 태그 | 미응답 기준 | 자동 처리 |
 |------|-------------|-----------|
+| `[CLARIFY]` | 1 heartbeat | 해석대로 진행 |
 | `[PROTOCOL-PATCH]` | 1 heartbeat | 자동승인 → 적용 |
 | `[LATERAL-THINK]` | 3 heartbeat | 옵션 A(현상 유지)로 자동 선택 |
 | 일반 질문 | 3 heartbeat | 스킵 |

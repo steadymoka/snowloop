@@ -34,12 +34,16 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 - `.snowloop/MILESTONES.md`
 - 향후 추가될 새 파일
 
-#### 2b: PROTOCOL.md 새 섹션 감지
+#### 2b: COMMS.md 섹션 감지
+- `.snowloop/COMMS.md`에 `### From Human (CLARIFY)` 섹션이 있는지 확인
+- 없으면 추가 대상으로 표시
+
+#### 2c: PROTOCOL.md 새 섹션 감지
 1. `.snowloop/protocol/PROTOCOL.md`를 `## ` 기준으로 섹션 헤딩 추출
 2. 모드별 템플릿 `${CLAUDE_SKILL_DIR}/../../templates/{mode}/PROTOCOL.md`를 같은 방식으로 추출
 3. 템플릿에 있지만 사용자 파일에 없는 `## ` 헤딩 = 추가 대상
 
-#### 2c: .gitignore 감지
+#### 2d: .gitignore 감지
 - `${CLAUDE_SKILL_DIR}/../../templates/shared/gitignore.snippet`의 각 줄이 `.gitignore`에 있는지 확인
 
 #### 출력 형식
@@ -72,17 +76,29 @@ protocol/MISSION, protocol/PROTOCOL(기존 섹션), logs/backlog-archive/, logs/
 - 템플릿에서 읽어서 `.snowloop/`에 Write
 - design 모드: output 디렉토리 구조 생성 (없는 경우)
 
-#### 3b: PROTOCOL.md 섹션 추가
+#### 3b: COMMS.md 섹션 추가
+- `### From Human (CLARIFY)` 섹션이 없으면, `### From Human` 바로 뒤에 추가:
+  ```markdown
+  ### From Human (CLARIFY)
+  <!-- EN: Messages here are refined by the agent before execution. Agent posts structured interpretation to From Agent with [CLARIFY] tag. 1 HB no-response = proceed with interpretation. -->
+  > 아이디어, 방향, 모호한 요청을 여기에 작성합니다.
+  > 에이전트가 "현재 상태 / 해석 / 구현 계획"으로 정제한 뒤 확인을 거쳐 실행합니다.
+
+  (비어 있음)
+  ```
+- 기존 `From Human` 내용은 절대 수정하지 않음
+
+#### 3c: PROTOCOL.md 섹션 추가
 - 템플릿에만 있는 새 섹션을 `.snowloop/protocol/PROTOCOL.md` 끝에 append
 - 각 섹션 앞에 `---` 구분자 추가
 - 기존 내용은 절대 수정하지 않음
 - self-evolution이 다음 RETRO에서 정리함
 
-#### 3c: .gitignore 갱신
+#### 3d: .gitignore 갱신
 - `# snowloop` 섹션이 있으면 해당 섹션에 누락 줄 추가
 - 없으면 snippet 전체를 끝에 추가
 
-#### 3d: .version 갱신
+#### 3e: .version 갱신
 `.snowloop/.version`에 Write:
 ```json
 {

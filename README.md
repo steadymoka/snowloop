@@ -76,7 +76,7 @@ Design iteration, artifact management, and feedback loops.
 
 ```
 Heartbeat Cycle (each cycle):
-  Check State → Process COMMS → Execute BACKLOG → Write LOG → RETRO Check
+  Read State (no cache) → Process COMMS → CLARIFY if needed → Execute BACKLOG → Write LOG → RETRO Check
 
 Self-Evolution (improvements found in RETRO):
   Stagnation Detection → Oscillation Detection → Regression Detection
@@ -87,7 +87,7 @@ Self-Evolution (improvements found in RETRO):
 
 ```
 .snowloop/
-├── COMMS.md         # Human ↔ Agent communication (From Human / From Agent)
+├── COMMS.md         # Human ↔ Agent communication (From Human / From Human (CLARIFY) / From Agent)
 ├── BACKLOG.md       # Task list (P0~P3 priority)
 ├── PROGRESS.md      # Current heartbeat count, task state
 ├── MILESTONES.md    # Mid-term goal checkpoints (active / done / dropped)
@@ -140,6 +140,17 @@ MISSION (long-term) → Milestones (mid-term) → BACKLOG (short-term)
 - **Oscillation**: Same patch applied → reverted → applied again (A→B→A pattern)
 - **Regression**: Metrics worsened after a protocol patch (distinguished from pre-existing issues)
 - **Wonder**: Socratic questioning of process assumptions ("What haven't we tested?")
+
+### CLARIFY — Input Refinement
+
+When a human writes to `From Human (CLARIFY)` in COMMS, the agent refines the message before acting:
+
+1. Structures the message: **current state** / **interpretation** / **implementation plan**
+2. Posts `[CLARIFY]` to From Agent for confirmation
+3. 1 HB no-response → proceeds with interpretation
+4. Human corrections → reflected before proceeding
+
+This prevents the "garbage in, garbage out" problem — vague requests get structured before implementation.
 
 ### Safety Rails
 

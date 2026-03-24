@@ -76,7 +76,7 @@ claude --dangerously-skip-permissions
 
 ```
 Heartbeat Cycle (매 사이클):
-  상태 확인 → COMMS 처리 → BACKLOG 작업 → LOG 기록 → RETRO 체크
+  상태 확인 (캐시 없이 Read) → COMMS 처리 → CLARIFY → BACKLOG 작업 → LOG 기록 → RETRO 체크
 
 Self-Evolution (RETRO에서 발견한 개선):
   Stagnation Detection → Oscillation Detection → Regression Detection
@@ -87,7 +87,7 @@ Self-Evolution (RETRO에서 발견한 개선):
 
 ```
 .snowloop/
-├── COMMS.md         # Human ↔ Agent 소통 (From Human / From Agent)
+├── COMMS.md         # Human ↔ Agent 소통 (From Human / From Human (CLARIFY) / From Agent)
 ├── BACKLOG.md       # 작업 목록 (P0~P3)
 ├── PROGRESS.md      # 현재 heartbeat, 작업 상태
 ├── MILESTONES.md    # 중기 목표 체크포인트 (active / done / dropped)
@@ -140,6 +140,17 @@ MISSION (장기) → Milestones (중기) → BACKLOG (단기)
 - **Oscillation**: 같은 패치의 적용→revert 반복 (A→B→A 패턴)
 - **Regression**: 프로토콜 패치 후 메트릭 악화 (기존 문제와 구분)
 - **Wonder**: 프로세스 가정에 대한 소크라테스식 질문 ("아직 검증 안 한 것은?")
+
+### CLARIFY — 입력 품질 정제
+
+사람이 COMMS의 `From Human (CLARIFY)`에 쓰면, 에이전트가 메시지를 정제한 뒤 실행합니다:
+
+1. 메시지를 구조화: **현재 상태** / **해석** / **구현 계획**
+2. From Agent에 `[CLARIFY]` 태그로 게시
+3. 1 HB 무응답 시 해석대로 진행
+4. 사람이 수정하면 반영 후 진행
+
+모호한 요청이 구현 후 뒤집히는 "garbage in, garbage out" 문제를 방지합니다.
 
 ### Safety Rails
 
