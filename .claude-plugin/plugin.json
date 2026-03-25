@@ -1,7 +1,7 @@
 {
   "name": "snowloop",
   "description": "Autonomous agent orchestration plugin — self-evolving .snowloop/ protocol with heartbeat cycles, retrospectives, and protocol evolution",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": {
     "name": "steadymoka"
   },
