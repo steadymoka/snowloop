@@ -2,15 +2,27 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-03-29
+
 ### Added
 
-- `From Human (CLARIFY)` section in COMMS — vague requests are refined before execution (structured interpretation → [CLARIFY] tag → 1 HB auto-resolve)
+- **Rebrand**: snowloop → tars (Interstellar-inspired autonomous agent)
+- **Core system**: `templates/` → `cores/` with `core.json` metadata. Community cores can be added by copying a directory
+- **Team execution mode**: `/tars:init` supports solo/team selection. Team mode creates orchestrator + specialized agents via `.claude/agents/`
+- `/tars:team` skill — add team agent configuration to existing solo projects
+- **Guard Bash protection**: guard.py now blocks dangerous Bash commands (rm, mv, cp, dd, etc.) targeting outside the project, destructive git operations, and redirects to external paths
+- `sudo` stripping in guard — detects real command underneath sudo prefix
+- Heredoc-aware redirect detection (negative lookbehind prevents false positives on `<<`)
+- `From Human (CLARIFY)` section in COMMS — vague requests are refined before execution
 - `[CLARIFY]` auto-resolve rule in COMMS timeout table (1 heartbeat)
 
 ### Changed
 
-- State check step now mandates **Read tool** for all files (PROGRESS, COMMS, BACKLOG) — prevents context cache from masking new human messages
-- Applied to both dev and design mode PROTOCOL.md templates
+- Guard hook matcher expanded: `Write|Edit|NotebookEdit` → `Write|Edit|NotebookEdit|Bash`
+- `.version` schema extended: `mode` → `core`, added `core_version`, `execution`, `team_cores` fields
+- PROGRESS.md template: `**Mode**` → `**Core**`
+- State check step now mandates **Read tool** for all files — prevents context cache issues
+- Plugin version bumped to 0.3.0
 
 ## [0.2.1] - 2026-03-22
 

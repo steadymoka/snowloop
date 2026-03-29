@@ -5,7 +5,7 @@
 **Heartbeat**: 0
 **Current Task**: 없음
 **Phase**: 초기화
-**Mode**: {MODE}
+**Core**: {CORE}
 
 ### Session Notes
 

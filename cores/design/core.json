@@ -1,0 +1,17 @@
+{
+  "name": "design",
+  "label": "기획",
+  "description": "디자인 이터레이션, 산출물 관리, 피드백 루프 중심의 기획 프로토콜",
+  "author": "steadymoka",
+  "version": "1.0.0",
+  "placeholders": [],
+  "extra_dirs": [
+    "output/specs",
+    "output/wireframes",
+    "output/research",
+    "output/drafts"
+  ],
+  "extra_templates": [
+    { "source": "shared/OUTPUT_INDEX.md", "dest": "output/INDEX.md" }
+  ]
+}

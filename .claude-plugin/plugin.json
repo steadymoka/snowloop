@@ -1,11 +1,11 @@
 {
-  "name": "snowloop",
-  "description": "Autonomous agent orchestration plugin — self-evolving .snowloop/ protocol with heartbeat cycles, retrospectives, and protocol evolution",
-  "version": "0.2.3",
+  "name": "tars",
+  "description": "Autonomous agent orchestration plugin — self-evolving .tars/ protocol with heartbeat cycles, retrospectives, and protocol evolution",
+  "version": "0.3.0",
   "author": {
     "name": "steadymoka"
   },
-  "repository": "https://github.com/steadymoka/snowloop",
+  "repository": "https://github.com/steadymoka/tars",
   "license": "MIT",
   "keywords": [
     "autonomous-agent",

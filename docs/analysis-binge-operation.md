@@ -1,7 +1,7 @@
 # @binge 운영 분석 리포트
 
-> 분석 대상: `.snowloop/` HB#1 ~ HB#162 (2026-03-22 ~ 2026-03-24)
-> snowloop v0.2.2, dev mode
+> 분석 대상: `.tars/` HB#1 ~ HB#162 (2026-03-22 ~ 2026-03-24)
+> tars v0.2.2, dev mode
 
 ---
 

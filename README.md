@@ -3,33 +3,33 @@
 </p>
 
 <h1 align="center">
-  <code>❄ snowloop</code>
+  <code>tars</code>
 </h1>
 
 <p align="center">
-  <a href="https://github.com/steadymoka/snowloop/releases"><img src="https://img.shields.io/badge/version-0.2.2-818cf8?style=flat-square" alt="version" /></a>
-  <a href="https://github.com/steadymoka/snowloop/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-38bdf8?style=flat-square" alt="license" /></a>
+  <a href="https://github.com/steadymoka/tars/releases"><img src="https://img.shields.io/badge/version-0.3.0-818cf8?style=flat-square" alt="version" /></a>
+  <a href="https://github.com/steadymoka/tars/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-38bdf8?style=flat-square" alt="license" /></a>
   <img src="https://img.shields.io/badge/platform-Claude_Code-6366f1?style=flat-square" alt="platform" />
 </p>
 
 <p align="center">
   Autonomous agent orchestration plugin for Claude Code.<br/>
-  The agent self-governs through a <code>.snowloop/</code> protocol and evolves its own process over time.
+  The agent self-governs through a <code>.tars/</code> protocol and evolves its own process over time.
 </p>
 
 ## Install
 
 ```
-/plugin marketplace add steadymoka/snowloop
-/plugin install snowloop@steadymoka-snowloop
+/plugin marketplace add steadymoka/tars
+/plugin install tars@steadymoka-tars
 ```
 
 ## Quick Start
 
 ```
-/snowloop:init                       # scaffold .snowloop/, choose mode (dev / design)
-/snowloop:heartbeat                  # run one autonomous cycle
-/loop 10m /snowloop:heartbeat        # auto-repeat every 10 minutes
+/tars:init                       # scaffold .tars/, choose core & execution mode
+/tars:heartbeat                  # run one autonomous cycle
+/loop 10m /tars:heartbeat        # auto-repeat every 10 minutes
 ```
 
 ### Autonomous Mode
@@ -40,37 +40,79 @@ For fully autonomous operation, start Claude Code with `--dangerously-skip-permi
 claude --dangerously-skip-permissions
 ```
 
-The `guard.py` hook (installed by `/snowloop:init`) blocks file modifications outside the project directory, so autonomous operation remains safe within your project scope.
+The `guard.py` hook (installed by `/tars:init`) blocks file modifications **and dangerous Bash commands** outside the project directory, so autonomous operation remains safe within your project scope.
 
 ## Skills
 
 | Skill | Description |
 |-------|-------------|
-| `/snowloop:init` | Initialize `.snowloop/` in your project. Choose dev or design mode |
-| `/snowloop:heartbeat` | Read PROTOCOL.md and execute one autonomous cycle |
-| `/snowloop:status` | Dashboard — heartbeat count, backlog depth, anomaly flags |
-| `/snowloop:retro` | Immediate retrospective — metrics, anomaly detection, protocol improvement proposals |
-| `/snowloop:evolve` | Protocol evolution analysis — patch effectiveness, lateral thinking options |
-| `/snowloop:upgrade` | Upgrade existing `.snowloop/` to match current plugin version |
+| `/tars:init` | Initialize `.tars/` — choose core (dev/design/...) and execution mode (solo/team) |
+| `/tars:heartbeat` | Read PROTOCOL.md and execute one autonomous cycle |
+| `/tars:status` | Dashboard — heartbeat count, backlog depth, anomaly flags |
+| `/tars:retro` | Immediate retrospective — metrics, anomaly detection, protocol improvement proposals |
+| `/tars:evolve` | Protocol evolution analysis — patch effectiveness, lateral thinking options |
+| `/tars:upgrade` | Upgrade existing `.tars/` to match current plugin version |
+| `/tars:team` | Add team agent configuration to an existing solo project |
 
-## Modes
+## Cores
 
-### Dev Mode
+A **core** defines how the agent operates — its protocol, mission template, and definition of done. Cores are the pluggable unit of tars.
 
-Build verification, testing strategy, and code patrol.
+### Built-in Cores
 
-- 3-level Definition of Done (L1 build → L2 functional → L3 integration)
-- Proactive Work tiers: Health Audit → User Scenario → Integration Check → Code Patrol → Gap Analysis
-- Phase Directives: Building → Stabilizing → Shipping
+| Core | Description |
+|------|-------------|
+| `dev` | Build verification, code patrol, testing strategy. 3-level DoD (build → functional → integration) |
+| `design` | Design iteration, artifact management, feedback loops. Output structure with specs/wireframes/research |
 
-### Design Mode
+### Community Cores
 
-Design iteration, artifact management, and feedback loops.
+Adding a community core is as simple as copying a directory:
 
-- Output structure: `specs/`, `wireframes/`, `research/`
-- Date-prefixed naming: `YYYY-MM-DD-<name>.<ext>`
-- Proactive Work tiers: Design Improvement → Cross-pollination → Competitive Analysis → Consistency Audit → Implementation Prep
-- Phase Directives: Exploring → Converging → Implementing
+```
+cores/
+├── dev/           ← built-in
+├── design/        ← built-in
+├── research/      ← copy a community core here
+│   ├── core.json
+│   ├── PROTOCOL.md
+│   └── MISSION.md
+└── shared/        ← reserved (common templates)
+```
+
+A core directory needs 3 files:
+- `core.json` — metadata (name, label, description, placeholders)
+- `PROTOCOL.md` — heartbeat cycle and operational rules
+- `MISSION.md` — mission template with DoD and proactive work tiers
+
+## Execution Modes
+
+### Solo (default)
+
+One agent, one core. The agent follows its core's protocol autonomously.
+
+```
+/tars:init → choose core → solo
+```
+
+### Team
+
+An orchestrator coordinates multiple specialized agents, each powered by a different core.
+
+```
+/tars:init → choose cores → team
+```
+
+Team mode creates:
+- `.claude/agents/orchestrator.md` — coordinates task distribution
+- `.claude/agents/{core}-agent.md` — specialized agent per core
+- `.tars/_workspace/` — shared artifact exchange between agents
+
+You can also convert a solo project to team later:
+
+```
+/tars:team    # add team agents to an existing solo project
+```
 
 ## How It Works
 
@@ -83,29 +125,25 @@ Self-Evolution (improvements found in RETRO):
   → Wonder Gap Analysis → Protocol Patch apply/propose
 ```
 
-### .snowloop/ Structure
+### .tars/ Structure
 
 ```
-.snowloop/
-├── COMMS.md         # Human ↔ Agent communication (From Human / From Human (CLARIFY) / From Agent)
+.tars/
+├── COMMS.md         # Human <> Agent communication
 ├── BACKLOG.md       # Task list (P0~P3 priority)
 ├── PROGRESS.md      # Current heartbeat count, task state
-├── MILESTONES.md    # Mid-term goal checkpoints (active / done / dropped)
-├── protocol/        # Agent configuration (rarely viewed)
+├── MILESTONES.md    # Mid-term goal checkpoints
+├── protocol/
 │   ├── MISSION.md   # Mission definition, DoD, Proactive Work
 │   ├── PROTOCOL.md  # Autonomous operation protocol (self-evolution target)
 │   └── EVOLUTION.md # Protocol change history
-├── logs/            # Records
+├── logs/
 │   ├── LOG.md       # Work history
 │   ├── RETRO.md     # Retrospective records
-│   ├── archive/     # Old LOG archives
+│   ├── archive/
 │   └── backlog-archive/
-│       └── INDEX.md
-└── output/          # Design mode artifacts
-    ├── specs/
-    ├── wireframes/
-    ├── research/
-    └── INDEX.md
+├── _workspace/      # Team mode: agent artifact exchange
+└── output/          # Design core: specs, wireframes, research
 ```
 
 ## Self-Evolution
@@ -119,47 +157,29 @@ Every 10 heartbeats, a retrospective runs automatically. When it discovers proce
 | Question | Challenge process assumptions | Escalate to patch after 3 repeats |
 | Revert | Metrics worsened after patch | Auto-detect + rollback |
 
-### Milestones
-
-Mid-term goal checkpoints between MISSION and BACKLOG. Defined in `MILESTONES.md`.
-
-```
-MISSION (long-term) → Milestones (mid-term) → BACKLOG (short-term)
-```
-
-- Agent checks milestone conditions on each task completion
-- Sends `[MILESTONE]` to COMMS when conditions appear met — human approval required
-- Agent can propose new milestones via `[MILESTONE-PROPOSAL]` in COMMS
-- Stagnation detected at 10 HB (status warning) and 20 HB (retro anomaly → suggest drop)
-- Active milestone overload alert when 3+ milestones are active simultaneously
-
 ### Anomaly Detection
 
-- **Milestone Stagnation**: Active milestone with no progress for 20+ heartbeats
 - **Stagnation**: Same task stuck for 3+ heartbeats, or 3 consecutive idle cycles
 - **Oscillation**: Same patch applied → reverted → applied again (A→B→A pattern)
-- **Regression**: Metrics worsened after a protocol patch (distinguished from pre-existing issues)
-- **Wonder**: Socratic questioning of process assumptions ("What haven't we tested?")
-
-### CLARIFY — Input Refinement
-
-When a human writes to `From Human (CLARIFY)` in COMMS, the agent refines the message before acting:
-
-1. Structures the message: **current state** / **interpretation** / **implementation plan**
-2. Posts `[CLARIFY]` to From Agent for confirmation
-3. 1 HB no-response → proceeds with interpretation
-4. Human corrections → reflected before proceeding
-
-This prevents the "garbage in, garbage out" problem — vague requests get structured before implementation.
+- **Regression**: Metrics worsened after a protocol patch
+- **Wonder**: Socratic questioning of process assumptions
 
 ### Safety Rails
-
-Prevents the agent from weakening its own quality standards:
 
 - Cannot lower Definition of Done levels
 - Cannot remove Proactive Work tiers
 - Cannot extend RETRO intervals
 - All three require explicit human approval to change
+
+## Guard Hook
+
+The guard hook (`guard.py`) protects autonomous operation:
+
+- **File writes**: Blocks Write/Edit/NotebookEdit outside the project directory
+- **Bash commands**: Blocks dangerous commands (`rm`, `mv`, `cp`, `dd`, etc.) targeting outside the project
+- **Destructive git**: Blocks `git reset --hard`, `git push --force`, `git clean -fd`, `git checkout -- .`
+- **Redirects**: Blocks `>`, `>>`, `tee` writing to absolute paths outside the project
+- **sudo**: Strips sudo prefix to detect the real command underneath
 
 ## License
 

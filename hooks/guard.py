@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Guard hook: blocks file modifications outside the project directory.
+"""Guard hook: blocks file modifications and dangerous Bash commands outside the project directory."""
 
-Placeholder {PROJECT_DIR} is replaced with the actual project path during init.
-"""
+from __future__ import annotations
 
 import json
 import os
+import re
+import shlex
 import sys
 
 PROJECT_DIR = "{PROJECT_DIR}"
@@ -17,9 +18,28 @@ ALLOWED_PREFIXES = [
     "/var/tmp",
 ]
 
+DANGEROUS_COMMANDS = {
+    "rm", "rmdir", "unlink", "shred",
+    "mv", "cp",
+    "chmod", "chown",
+    "dd", "truncate",
+    "ln",
+}
+
+DANGEROUS_GIT_PATTERNS = [
+    re.compile(r"\bgit\s+reset\s+--hard"),
+    re.compile(r"\bgit\s+clean\s+.*-[a-zA-Z]*[fd]"),
+    re.compile(r"\bgit\s+push\s+.*(-f\b|--force)"),
+    re.compile(r"\bgit\s+checkout\s+--\s+\."),
+]
+
+REDIRECT_PATH_RE = re.compile(r"(?<!<)>{1,2}\s*(/\S+)")
+TEE_PATH_RE = re.compile(r"\btee\s+(?:-[a-zA-Z]*\s+)*(/\S+)")
+
+SUDO_ARG_FLAGS = {"-u", "-g", "-C", "-D", "-R", "-T", "-h", "-p"}
+
 
 def get_file_path(tool_input: dict) -> str | None:
-    """Extract file_path from tool input regardless of tool type."""
     if "file_path" in tool_input:
         return tool_input["file_path"]
     if "path" in tool_input:
@@ -28,7 +48,6 @@ def get_file_path(tool_input: dict) -> str | None:
 
 
 def is_within_directory(file_path: str, directory: str) -> bool:
-    """Check if file_path is within directory, resolving symlinks."""
     try:
         resolved = os.path.realpath(file_path)
         resolved_dir = os.path.realpath(directory)
@@ -38,18 +57,111 @@ def is_within_directory(file_path: str, directory: str) -> bool:
 
 
 def is_allowed_exception(file_path: str) -> bool:
-    """Check if the path falls under an allowed exception."""
     resolved = os.path.realpath(file_path)
 
     for prefix in ALLOWED_PREFIXES:
         if resolved.startswith(prefix + os.sep) or resolved == prefix:
             return True
 
-    # .claude paths within the project directory
     if is_within_directory(file_path, os.path.join(PROJECT_DIR, ".claude")):
         return True
 
     return False
+
+
+def is_path_ok(path: str) -> bool:
+    return is_within_directory(path, PROJECT_DIR) or is_allowed_exception(path)
+
+
+def strip_sudo(tokens: list[str]) -> list[str]:
+    if not tokens or tokens[0] != "sudo":
+        return tokens
+    i = 1
+    while i < len(tokens):
+        if tokens[i] == "--":
+            return tokens[i + 1:]
+        if tokens[i].startswith("-"):
+            if tokens[i] in SUDO_ARG_FLAGS and i + 1 < len(tokens):
+                i += 2
+            else:
+                i += 1
+        else:
+            break
+    return tokens[i:] if i < len(tokens) else tokens
+
+
+def check_bash_command(command: str) -> str | None:
+    for pattern in DANGEROUS_GIT_PATTERNS:
+        if pattern.search(command):
+            return f"Destructive git operation blocked."
+
+    reason = _check_redirects(command)
+    if reason:
+        return reason
+
+    for segment in re.split(r"\s*(?:&&|\|\||;|\|)\s*", command):
+        reason = _check_segment(segment.strip())
+        if reason:
+            return reason
+
+    return None
+
+
+def _check_redirects(command: str) -> str | None:
+    for match in REDIRECT_PATH_RE.finditer(command):
+        path = match.group(1)
+        if not is_path_ok(path):
+            return f"Redirect targets outside project: {path}"
+
+    for match in TEE_PATH_RE.finditer(command):
+        path = match.group(1)
+        if not is_path_ok(path):
+            return f"tee targets outside project: {path}"
+
+    return None
+
+
+def _check_segment(segment: str) -> str | None:
+    if not segment:
+        return None
+
+    try:
+        tokens = shlex.split(segment)
+    except ValueError:
+        return None
+
+    if not tokens:
+        return None
+
+    tokens = strip_sudo(tokens)
+    if not tokens:
+        return None
+
+    cmd = os.path.basename(tokens[0])
+
+    if cmd not in DANGEROUS_COMMANDS:
+        return None
+
+    for arg in tokens[1:]:
+        if arg.startswith("-"):
+            continue
+        if arg.startswith("$"):
+            continue
+
+        # dd uses key=value args (e.g. of=/dev/sda)
+        if cmd == "dd" and "=" in arg:
+            key, _, val = arg.partition("=")
+            if key in ("of", "if") and val:
+                path = val if os.path.isabs(val) else os.path.join(PROJECT_DIR, val)
+                if not is_path_ok(path):
+                    return f"'{cmd}' targets outside project: {val}"
+            continue
+
+        path = arg if os.path.isabs(arg) else os.path.join(PROJECT_DIR, arg)
+        if not is_path_ok(path):
+            return f"'{cmd}' targets outside project: {arg}"
+
+    return None
 
 
 def block(reason: str) -> None:
@@ -64,7 +176,7 @@ def allow() -> None:
 
 def main() -> None:
     if PROJECT_DIR == "{" + "PROJECT_DIR" + "}":
-        block("Guard not initialized — run /snowloop:init first.")
+        block("Guard not initialized — run /tars:init first.")
         return
 
     try:
@@ -75,13 +187,21 @@ def main() -> None:
         return
 
     tool_name = event.get("tool_name", "")
+    tool_input = event.get("tool_input", {})
+
+    if tool_name == "Bash":
+        command = tool_input.get("command", "")
+        reason = check_bash_command(command)
+        if reason:
+            block(reason)
+        allow()
+        return
+
     if tool_name not in WRITE_TOOLS:
         allow()
         return
 
-    tool_input = event.get("tool_input", {})
     file_path = get_file_path(tool_input)
-
     if file_path is None:
         allow()
         return

@@ -1,0 +1,14 @@
+{
+  "name": "dev",
+  "label": "개발",
+  "description": "빌드 검증, 코드 패트롤, 테스트 전략 중심의 소프트웨어 개발 프로토콜",
+  "author": "steadymoka",
+  "version": "1.0.0",
+  "placeholders": [
+    { "key": "BUILD_CMD", "prompt": "빌드 커맨드", "example": "npm run build" },
+    { "key": "TEST_CMD", "prompt": "테스트 커맨드", "example": "npm test" },
+    { "key": "LINT_CMD", "prompt": "린트 커맨드", "example": "npm run lint" }
+  ],
+  "extra_dirs": [],
+  "extra_templates": []
+}

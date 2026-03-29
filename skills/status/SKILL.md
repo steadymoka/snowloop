@@ -4,28 +4,28 @@ description: "Display compact dashboard of current autonomous operation state. S
 allowed-tools: Read, Glob
 ---
 
-# /snowloop:status — 운영 대시보드
+# /tars:status — 운영 대시보드
 
 ## 실행 절차
 
 ### 1. 파일 읽기
 다음 파일을 읽습니다:
-- `.snowloop/PROGRESS.md` — 현재 heartbeat, 현재 작업, 모드
-- `.snowloop/BACKLOG.md` — 백로그 깊이 (미완료 티켓 수)
-- `.snowloop/logs/LOG.md` — 최근 3개 heartbeat 기록
-- `.snowloop/logs/RETRO.md` — 최신 RETRO (있으면)
-- `.snowloop/COMMS.md` — From Human / From Agent 메시지 수
-- `.snowloop/protocol/EVOLUTION.md` — 최근 프로토콜 변경 (있으면)
-- `.snowloop/MILESTONES.md` — Milestone 상태 (active/done/dropped 수)
+- `.tars/PROGRESS.md` — 현재 heartbeat, 현재 작업, core
+- `.tars/BACKLOG.md` — 백로그 깊이 (미완료 티켓 수)
+- `.tars/logs/LOG.md` — 최근 3개 heartbeat 기록
+- `.tars/logs/RETRO.md` — 최신 RETRO (있으면)
+- `.tars/COMMS.md` — From Human / From Agent 메시지 수
+- `.tars/protocol/EVOLUTION.md` — 최근 프로토콜 변경 (있으면)
+- `.tars/MILESTONES.md` — Milestone 상태 (active/done/dropped 수)
 
 ### 2. 대시보드 출력
 
 ```
-## snowloop status
+## tars status
 
 | 항목 | 값 |
 |------|-----|
-| Mode | {dev/design} |
+| Core | {dev/design/...} |
 | Heartbeat | #{n} |
 | Current Task | {task or 없음} |
 | Phase | {phase} |
@@ -55,4 +55,4 @@ allowed-tools: Read, Glob
 
 ## 에러 핸들링
 
-- `.snowloop/` 디렉토리가 없으면: "snowloop이 초기화되지 않았습니다. `/snowloop:init`을 먼저 실행하세요."
+- `.tars/` 디렉토리가 없으면: "tars이 초기화되지 않았습니다. `/tars:init`을 먼저 실행하세요."

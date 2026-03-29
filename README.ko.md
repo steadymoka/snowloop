@@ -3,33 +3,33 @@
 </p>
 
 <h1 align="center">
-  <code>❄ snowloop</code>
+  <code>tars</code>
 </h1>
 
 <p align="center">
-  <a href="https://github.com/steadymoka/snowloop/releases"><img src="https://img.shields.io/badge/version-0.2.2-818cf8?style=flat-square" alt="version" /></a>
-  <a href="https://github.com/steadymoka/snowloop/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-38bdf8?style=flat-square" alt="license" /></a>
+  <a href="https://github.com/steadymoka/tars/releases"><img src="https://img.shields.io/badge/version-0.3.0-818cf8?style=flat-square" alt="version" /></a>
+  <a href="https://github.com/steadymoka/tars/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-38bdf8?style=flat-square" alt="license" /></a>
   <img src="https://img.shields.io/badge/platform-Claude_Code-6366f1?style=flat-square" alt="platform" />
 </p>
 
 <p align="center">
   Claude Code용 자율 에이전트 운영 플러그인.<br/>
-  <code>.snowloop/</code> 프로토콜을 통해 에이전트가 자율 운영하고, 스스로 프로토콜을 진화시킵니다.
+  <code>.tars/</code> 프로토콜을 통해 에이전트가 자율 운영하고, 스스로 프로토콜을 진화시킵니다.
 </p>
 
 ## 설치
 
 ```
-/plugin marketplace add steadymoka/snowloop
-/plugin install snowloop@steadymoka-snowloop
+/plugin marketplace add steadymoka/tars
+/plugin install tars@steadymoka-tars
 ```
 
 ## 빠른 시작
 
 ```
-/snowloop:init                       # .snowloop/ 생성, 모드 선택 (dev / design)
-/snowloop:heartbeat                  # 자율 운영 1 사이클
-/loop 10m /snowloop:heartbeat        # 10분마다 자동 반복
+/tars:init                       # .tars/ 생성, core 선택, 실행 방식 선택
+/tars:heartbeat                  # 자율 운영 1 사이클
+/loop 10m /tars:heartbeat        # 10분마다 자동 반복
 ```
 
 ### 자율 운영 모드
@@ -40,37 +40,79 @@
 claude --dangerously-skip-permissions
 ```
 
-`/snowloop:init`이 설치하는 `guard.py` 훅이 프로젝트 디렉토리 밖 파일 수정을 차단하므로, 자율 운영 중에도 프로젝트 범위 내에서 안전하게 동작합니다.
+`/tars:init`이 설치하는 `guard.py` 훅이 프로젝트 디렉토리 밖 파일 수정과 **위험한 Bash 명령어**를 차단하므로, 자율 운영 중에도 프로젝트 범위 내에서 안전하게 동작합니다.
 
 ## Skills
 
 | Skill | 설명 |
 |-------|------|
-| `/snowloop:init` | 프로젝트에 `.snowloop/` 초기화. dev(개발) 또는 design(기획) 모드 선택 |
-| `/snowloop:heartbeat` | PROTOCOL.md를 읽고 1회 자율 사이클 실행 |
-| `/snowloop:status` | 현재 상태 대시보드 — heartbeat 수, 백로그, 이상 징후 |
-| `/snowloop:retro` | 즉시 회고 — 메트릭 산출, anomaly 탐지, 프로토콜 개선 제안 |
-| `/snowloop:evolve` | 프로토콜 진화 분석 — 패치 효과 비교, lateral thinking 옵션 |
-| `/snowloop:upgrade` | 기존 .snowloop/ 프로젝트를 최신 플러그인 버전으로 업그레이드 |
+| `/tars:init` | `.tars/` 초기화 — core 선택 (dev/design/...), 실행 방식 선택 (solo/team) |
+| `/tars:heartbeat` | PROTOCOL.md를 읽고 1회 자율 사이클 실행 |
+| `/tars:status` | 현재 상태 대시보드 — heartbeat 수, 백로그, 이상 징후 |
+| `/tars:retro` | 즉시 회고 — 메트릭 산출, anomaly 탐지, 프로토콜 개선 제안 |
+| `/tars:evolve` | 프로토콜 진화 분석 — 패치 효과 비교, lateral thinking 옵션 |
+| `/tars:upgrade` | 기존 .tars/ 프로젝트를 최신 플러그인 버전으로 업그레이드 |
+| `/tars:team` | 기존 solo 프로젝트에 팀 에이전트 구성 추가 |
 
-## 모드
+## Core 시스템
 
-### Dev 모드
+**core**는 에이전트의 운영 방식을 정의합니다 — 프로토콜, 미션 템플릿, 완료 기준. tars의 확장 단위입니다.
 
-빌드 검증, 테스트 전략, 코드 패트롤 중심.
+### 기본 제공 Core
 
-- DoD 3레벨 (L1 빌드 → L2 기능검증 → L3 통합검증)
-- Proactive Work: Health Audit → User Scenario → Integration Check → Code Patrol → Gap Analysis
-- Phase Directives: Building → Stabilizing → Shipping
+| Core | 설명 |
+|------|------|
+| `dev` | 빌드 검증, 코드 패트롤, 테스트 전략. 3레벨 DoD (빌드 → 기능검증 → 통합검증) |
+| `design` | 디자인 이터레이션, 산출물 관리, 피드백 루프. specs/wireframes/research 산출물 구조 |
 
-### Design 모드
+### 커뮤니티 Core
 
-디자인 이터레이션, 산출물 관리, 피드백 루프 중심.
+커뮤니티 core 추가는 디렉토리 복사만으로 가능합니다:
 
-- 산출물 구조: `specs/`, `wireframes/`, `research/`
-- 날짜 프리픽스 네이밍: `YYYY-MM-DD-<name>.<ext>`
-- Proactive Work: 기존 디자인 개선 → 크로스폴리네이션 → 경쟁 분석 → 일관성 감사 → 구현 준비
-- Phase Directives: Exploring → Converging → Implementing
+```
+cores/
+├── dev/           ← 기본 제공
+├── design/        ← 기본 제공
+├── research/      ← 커뮤니티 core를 여기에 복사
+│   ├── core.json
+│   ├── PROTOCOL.md
+│   └── MISSION.md
+└── shared/        ← 예약 (공통 템플릿)
+```
+
+core 디렉토리에는 3개 파일이 필요합니다:
+- `core.json` — 메타데이터 (name, label, description, placeholders)
+- `PROTOCOL.md` — heartbeat 사이클과 운영 규칙
+- `MISSION.md` — 미션 템플릿 (DoD, Proactive Work 포함)
+
+## 실행 방식
+
+### Solo (기본)
+
+하나의 에이전트, 하나의 core. 선택한 core의 프로토콜에 따라 자율 운영합니다.
+
+```
+/tars:init → core 선택 → solo
+```
+
+### Team
+
+orchestrator가 여러 전문 에이전트를 조율합니다. 각 에이전트는 서로 다른 core로 동작합니다.
+
+```
+/tars:init → core 복수 선택 → team
+```
+
+Team 모드가 생성하는 파일:
+- `.claude/agents/orchestrator.md` — 태스크 분배 조율자
+- `.claude/agents/{core}-agent.md` — core별 전문 에이전트
+- `.tars/_workspace/` — 에이전트 간 산출물 교환 공간
+
+기존 solo 프로젝트도 나중에 team으로 전환할 수 있습니다:
+
+```
+/tars:team    # 기존 solo 프로젝트에 팀 에이전트 추가
+```
 
 ## 작동 방식
 
@@ -83,29 +125,25 @@ Self-Evolution (RETRO에서 발견한 개선):
   → Wonder Gap Analysis → Protocol Patch 적용/제안
 ```
 
-### .snowloop/ 구조
+### .tars/ 구조
 
 ```
-.snowloop/
-├── COMMS.md         # Human ↔ Agent 소통 (From Human / From Human (CLARIFY) / From Agent)
+.tars/
+├── COMMS.md         # Human <> Agent 소통
 ├── BACKLOG.md       # 작업 목록 (P0~P3)
 ├── PROGRESS.md      # 현재 heartbeat, 작업 상태
-├── MILESTONES.md    # 중기 목표 체크포인트 (active / done / dropped)
-├── protocol/        # 에이전트 설정 (자주 보지 않음)
+├── MILESTONES.md    # 중기 목표 체크포인트
+├── protocol/
 │   ├── MISSION.md   # 미션 정의, DoD, Proactive Work
 │   ├── PROTOCOL.md  # 자율 운영 프로토콜 (self-evolution 대상)
 │   └── EVOLUTION.md # 프로토콜 변경 이력
-├── logs/            # 기록
+├── logs/
 │   ├── LOG.md       # 작업 이력
 │   ├── RETRO.md     # 회고 기록
-│   ├── archive/     # 오래된 LOG 아카이브
+│   ├── archive/
 │   └── backlog-archive/
-│       └── INDEX.md
-└── output/          # 기획 모드 산출물
-    ├── specs/
-    ├── wireframes/
-    ├── research/
-    └── INDEX.md
+├── _workspace/      # Team 모드: 에이전트 간 산출물 교환
+└── output/          # Design core: specs, wireframes, research
 ```
 
 ## Self-Evolution
@@ -119,47 +157,29 @@ RETRO(10 heartbeat마다 자동)에서 프로세스 개선을 발견하면 PROTO
 | Question | 프로세스 가정 질문 | 3회 반복 시 patch로 승격 |
 | Revert | 메트릭 악화 시 되돌림 | 자동 감지 + 되돌림 |
 
-### Milestones
-
-MISSION과 BACKLOG 사이의 중기 목표 체크포인트. `MILESTONES.md`에 정의합니다.
-
-```
-MISSION (장기) → Milestones (중기) → BACKLOG (단기)
-```
-
-- 에이전트가 태스크 완료 시마다 마일스톤 조건 충족 여부를 확인
-- 조건 충족 시 COMMS에 `[MILESTONE]` 태그로 알림 — human 승인 필요
-- 에이전트가 `[MILESTONE-PROPOSAL]`로 새 마일스톤 제안 가능
-- 10 HB 정체 시 status 경고, 20 HB 정체 시 retro anomaly → drop 제안
-- active 마일스톤 3개 이상이면 과부하 경고
-
 ### Anomaly Detection
 
-- **Milestone Stagnation**: active 마일스톤이 20+ heartbeat 동안 진전 없음
 - **Stagnation**: 같은 작업 3+ heartbeat 정체, 또는 idle 3연속
 - **Oscillation**: 같은 패치의 적용→revert 반복 (A→B→A 패턴)
-- **Regression**: 프로토콜 패치 후 메트릭 악화 (기존 문제와 구분)
-- **Wonder**: 프로세스 가정에 대한 소크라테스식 질문 ("아직 검증 안 한 것은?")
-
-### CLARIFY — 입력 품질 정제
-
-사람이 COMMS의 `From Human (CLARIFY)`에 쓰면, 에이전트가 메시지를 정제한 뒤 실행합니다:
-
-1. 메시지를 구조화: **현재 상태** / **해석** / **구현 계획**
-2. From Agent에 `[CLARIFY]` 태그로 게시
-3. 1 HB 무응답 시 해석대로 진행
-4. 사람이 수정하면 반영 후 진행
-
-모호한 요청이 구현 후 뒤집히는 "garbage in, garbage out" 문제를 방지합니다.
+- **Regression**: 프로토콜 패치 후 메트릭 악화
+- **Wonder**: 프로세스 가정에 대한 소크라테스식 질문
 
 ### Safety Rails
-
-자가 품질 기준 완화를 방지합니다:
 
 - DoD 레벨 하향 금지
 - Proactive Work 제거 금지
 - RETRO 주기 연장 금지
 - 위 3가지는 human 명시 승인 없이 변경 불가
+
+## Guard Hook
+
+`guard.py` 훅이 자율 운영을 보호합니다:
+
+- **파일 쓰기**: 프로젝트 밖 Write/Edit/NotebookEdit 차단
+- **Bash 명령어**: 위험 명령어(`rm`, `mv`, `cp`, `dd` 등)가 프로젝트 밖을 대상으로 할 때 차단
+- **Destructive git**: `git reset --hard`, `git push --force`, `git clean -fd`, `git checkout -- .` 차단
+- **리다이렉트**: `>`, `>>`, `tee`가 프로젝트 밖 절대경로로 쓸 때 차단
+- **sudo**: sudo를 벗겨내고 실제 명령어를 감지
 
 ## 라이선스
 

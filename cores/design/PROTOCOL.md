@@ -37,7 +37,7 @@
   - 발견한 이슈/아이디어는 BACKLOG에 새 티켓으로 등록
 
 ### 3. 산출물 관리
-- 새 산출물 생성 시 → `.snowloop/output/drafts/`에 먼저 작성
+- 새 산출물 생성 시 → `.tars/output/drafts/`에 먼저 작성
 - 리뷰 완료된 산출물 → 카테고리 폴더로 이동
 - INDEX.md 갱신 (새 항목 추가 또는 Status 변경)
 
@@ -77,7 +77,7 @@
 > 사용자가 이의 있으면 `From Human`에 작성하여 되돌릴 수 있습니다.
 
 ### 7. LOG 아카이브
-- logs/LOG.md 항목이 50개 초과 시 → `.snowloop/logs/archive/log-{date}.md`로 이동
+- logs/LOG.md 항목이 50개 초과 시 → `.tars/logs/archive/log-{date}.md`로 이동
 
 ---
 

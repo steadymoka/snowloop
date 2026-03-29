@@ -8,7 +8,7 @@
 ## Definition of Done (DoD)
 
 ### 산출물 기준
-- 요구되는 아티팩트가 `.snowloop/output/` 하위에 존재
+- 요구되는 아티팩트가 `.tars/output/` 하위에 존재
 - 산출물이 INDEX.md에 등록됨
 - Status가 `final`로 표기됨
 
@@ -23,7 +23,7 @@
 
 ### 저장 구조
 ```
-.snowloop/output/
+.tars/output/
 ├── specs/          # 스펙 문서, 기능 정의서, PRD
 ├── wireframes/     # 와이어프레임, 목업, UI 플로우
 ├── research/       # 경쟁 분석, 사용자 리서치, 기술 조사

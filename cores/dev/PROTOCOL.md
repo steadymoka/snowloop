@@ -71,7 +71,7 @@
 > 사용자가 이의 있으면 `From Human`에 작성하여 되돌릴 수 있습니다.
 
 ### 6. LOG 아카이브
-- logs/LOG.md 항목이 50개 초과 시 → 오래된 항목을 `.snowloop/logs/archive/log-{date}.md`로 이동
+- logs/LOG.md 항목이 50개 초과 시 → 오래된 항목을 `.tars/logs/archive/log-{date}.md`로 이동
 
 ---
 

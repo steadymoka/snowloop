@@ -4,7 +4,7 @@ description: "Run immediate retrospective outside the regular 10-heartbeat cycle
 allowed-tools: Read, Write, Edit, Glob
 ---
 
-# /snowloop:retro — 즉시 회고
+# /tars:retro — 즉시 회고
 
 정규 10 heartbeat 주기 외에 즉시 회고를 실행합니다.
 
@@ -13,12 +13,12 @@ allowed-tools: Read, Write, Edit, Glob
 ### 1. 데이터 수집
 
 다음 파일을 읽습니다:
-- `.snowloop/logs/LOG.md` — 전체 (또는 최근 10개 heartbeat)
-- `.snowloop/BACKLOG.md` — 현재 백로그 상태
-- `.snowloop/logs/RETRO.md` — 이전 RETRO 기록들 (패턴 분석용)
-- `.snowloop/protocol/EVOLUTION.md` — 프로토콜 변경 이력
-- `.snowloop/PROGRESS.md` — 현재 heartbeat 수
-- `.snowloop/MILESTONES.md` — active/done Milestone 상태 및 생성일
+- `.tars/logs/LOG.md` — 전체 (또는 최근 10개 heartbeat)
+- `.tars/BACKLOG.md` — 현재 백로그 상태
+- `.tars/logs/RETRO.md` — 이전 RETRO 기록들 (패턴 분석용)
+- `.tars/protocol/EVOLUTION.md` — 프로토콜 변경 이력
+- `.tars/PROGRESS.md` — 현재 heartbeat 수
+- `.tars/MILESTONES.md` — active/done Milestone 상태 및 생성일
 
 ### 2. 메트릭 산출
 
@@ -114,4 +114,4 @@ Anomaly 또는 Wonder에서 프로토콜 변경이 필요하다고 판단되면:
 ## 에러 핸들링
 
 - LOG가 비어있거나 heartbeat가 0이면: "기록이 부족합니다. heartbeat를 먼저 실행하세요."
-- `.snowloop/` 없으면: "snowloop이 초기화되지 않았습니다."
+- `.tars/` 없으면: "tars이 초기화되지 않았습니다."
